@@ -1,0 +1,7 @@
+﻿services:
+  ad-platform:
+    image: ad-platform
+    build:
+      context: .
+      dockerfile: Ad-platform/Dockerfile
+
