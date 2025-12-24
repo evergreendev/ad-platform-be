@@ -18,11 +18,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+});
 
 builder.Services.AddOpenIddict()
     .AddCore(options => { options.UseEntityFrameworkCore().UseDbContext<ApplicationDbContext>(); })
@@ -84,9 +91,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapRazorPages();
+
 if (app.Environment.IsDevelopment())
 {
-    await OpenIddictSeeder.SeedAsync(app.Services);
+    //await OpenIddictSeeder.SeedAsync(app.Services);
 }
 
 app.Run();
