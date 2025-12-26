@@ -18,7 +18,7 @@ public class OpenIddictSeeder
             var apiScope = new OpenIddictScopeDescriptor
             {
                 Name = "api",
-                Resources = { "Ad platform api" }
+                Resources = { "api" }
             };
             
             await scopeManager.CreateAsync(apiScope);

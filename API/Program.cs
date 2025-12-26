@@ -2,24 +2,38 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Ad_platform.Data;
 using Microsoft.AspNetCore.Authorization;
+using OpenIddict.Validation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                       throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("Default") ??
+                       throw new InvalidOperationException("Connection string 'Default' not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+    {
+        options.UseNpgsql(connectionString);
+    }
+);
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
 
-builder.Services.AddAuthorizationBuilder()
-    .SetDefaultPolicy(new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build()
-    );
+builder.Services.AddOpenIddict()
+    .AddValidation(options =>
+    { 
+        //todo set this dynamically
+        options.SetIssuer("https://localhost:7032/");
+        
+        options.AddAudiences("api");
+
+        options.UseSystemNetHttp();
+        
+        options.UseAspNetCore();
+    });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
@@ -40,7 +54,15 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+// Example protected endpoint
+app.MapGet("/whoami", (System.Security.Claims.ClaimsPrincipal user) =>
+    {
+        return user.Claims.Select(c => new { c.Type, c.Value });
+    })
+    .RequireAuthorization();
 
 app.MapControllers();
 app.MapControllerRoute(

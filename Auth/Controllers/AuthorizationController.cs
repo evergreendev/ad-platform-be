@@ -68,6 +68,7 @@ public class AuthorizationController : Controller
         
         // Apply requested scopes (you can also restrict these if you want).
         principal.SetScopes(request.GetScopes());
+        principal.SetResources("api");
         
         // Decide which claims go into which tokens.
         foreach (var claim in principal.Claims)

@@ -35,6 +35,8 @@ builder.Services.AddOpenIddict()
     .AddCore(options => { options.UseEntityFrameworkCore().UseDbContext<ApplicationDbContext>(); })
     .AddServer(options =>
     {
+        options.SetIssuer(new Uri("https://localhost:7032/"));
+        
         options.SetAuthorizationEndpointUris("/connect/authorize")
             .SetTokenEndpointUris("/connect/token");
 
@@ -95,7 +97,7 @@ app.MapRazorPages();
 
 if (app.Environment.IsDevelopment())
 {
-    //await OpenIddictSeeder.SeedAsync(app.Services);
+    await OpenIddictSeeder.SeedAsync(app.Services);
 }
 
 app.Run();
