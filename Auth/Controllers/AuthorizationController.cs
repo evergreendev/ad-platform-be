@@ -111,6 +111,11 @@ public class AuthorizationController : Controller
 
         return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
+
+    [HttpPost("~/connect/introspect")]
+    [IgnoreAntiforgeryToken]
+    [Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
+    public IActionResult Introspect() => Ok();
     
     private static IEnumerable<string> GetDestinations(Claim claim)
     {

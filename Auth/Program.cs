@@ -38,7 +38,8 @@ builder.Services.AddOpenIddict()
         options.SetIssuer(new Uri("https://localhost:7032/"));
         
         options.SetAuthorizationEndpointUris("/connect/authorize")
-            .SetTokenEndpointUris("/connect/token");
+            .SetTokenEndpointUris("/connect/token")
+            .SetIntrospectionEndpointUris("/connect/introspect");
 
         options.AllowAuthorizationCodeFlow();
 
@@ -59,6 +60,11 @@ builder.Services.AddOpenIddict()
         options.UseAspNetCore()
             .EnableAuthorizationEndpointPassthrough()
             .EnableTokenEndpointPassthrough();
+    })
+    .AddValidation(options =>
+    {
+        options.UseAspNetCore();
+        options.UseLocalServer();
     });
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>

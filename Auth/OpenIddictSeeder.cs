@@ -46,6 +46,7 @@ public class OpenIddictSeeder
                     // endpoints
                     OpenIddictConstants.Permissions.Endpoints.Authorization,
                     OpenIddictConstants.Permissions.Endpoints.Token,
+                    OpenIddictConstants.Permissions.Endpoints.Introspection,
 
                     // grant types
                     OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,

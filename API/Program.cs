@@ -28,6 +28,10 @@ builder.Services.AddOpenIddict()
         
         options.AddAudiences("api");
 
+        options.SetClientId("next-app");
+        options.SetClientSecret("dev-secret-change");
+
+        options.UseIntrospection();
         options.UseSystemNetHttp();
         
         options.UseAspNetCore();
