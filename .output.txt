@@ -1,141 +1,76 @@
 ﻿
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform
+    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----         12/1/2025   1:18 PM                .idea
-d-----        12/23/2025   9:09 AM                Ad-platform
-d-----        12/23/2025  10:12 AM                Auth
--a----         12/1/2025   1:19 PM             56 .gitignore
--a----        12/23/2025   9:09 AM           1508 Ad-platform.sln
--a----         12/1/2025   1:19 PM            128 compose.yaml
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/1/2025   1:18 PM                .idea.Ad-platform
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-platform
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/23/2025  10:18 AM                .idea
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-platform\.idea
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:03 PM                dataSources
-d-----        12/17/2025   4:52 PM                httpRequests
-d-----         12/5/2025   4:02 PM                queries
--a----         12/1/2025   1:19 PM            350 .gitignore
--a----        12/23/2025   9:10 AM            825 dataSources.local.xml
--a----        12/23/2025  10:18 AM            537 dataSources.xml
--a----         12/5/2025   4:03 PM            271 data_source_mapping.xml
--a----         12/1/2025   1:18 PM            169 encodings.xml
--a----         12/1/2025   1:19 PM            205 indexLayout.xml
--a----         12/1/2025   1:19 PM            308 projectSettingsUpdater.xml
--a----         12/5/2025   4:03 PM            236 sqldialects.xml
--a----         12/1/2025   1:19 PM            185 vcs.xml
--a----        12/23/2025  10:18 AM          24910 workspace.xml
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\dataSources
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:02 PM                d60f6897-7b21-4790-a346-12c50
-                                                  a11f7d5
--a----         12/5/2025   4:03 PM          68258 d60f6897-7b21-4790-a346-12c50
-                                                  a11f7d5.xml
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\dataSources\d60f6897-7b21-4790-a346-12c50a11f7d5
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:02 PM                storage_v2
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\dataSources\d60f6897-7b21-4790-a346-12c50a11f7d5\storage_v2
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:02 PM                _src_
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\dataSources\d60f6897-7b21-4790-a346-12c50a11f7d5\storage_v2\_sr
-    c_
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:02 PM                schema
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\dataSources\d60f6897-7b21-4790-a346-12c50a11f7d5\storage_v2\_sr
-    c_\schema
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/5/2025   4:02 PM             59 main.uQUzAA.meta
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\httpRequests
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        12/17/2025   4:49 PM             31 http-client.cookies
--a----        12/17/2025   4:52 PM            893 http-requests-log.http
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\.idea\.idea.Ad-pla
-    tform\.idea\queries
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/5/2025   4:02 PM              0 Query.sql
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/1/2025   1:19 PM                bin
-d-----        12/17/2025   4:49 PM                Controllers
-d-----         12/1/2025   1:19 PM                Data
-d-----         12/1/2025   1:19 PM                Models
-d-----        12/23/2025  10:09 AM                obj
-d-----         12/1/2025   1:18 PM                Properties
--a----        12/23/2025   9:09 AM           7985 Ad-platform.csproj
--a----         12/5/2025   4:08 PM         106496 app.db
--a----         12/1/2025   1:18 PM            127 appsettings.Development.json
--a----         12/1/2025   1:18 PM            242 appsettings.json
--a----        12/17/2025   4:54 PM           1553 Program.cs
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin
+d-----        12/23/2025   9:09 AM                bin
+d-----        12/29/2025   4:56 PM                Controllers
+d-----        12/23/2025  11:09 AM                Migrations
+d-----        12/23/2025   9:09 AM                Models
+d-----        12/29/2025   3:36 PM                obj
+d-----        12/23/2025   9:09 AM                Properties
+d-----        12/23/2025   9:09 AM                Views
+d-----        12/23/2025   9:09 AM                wwwroot
+-a----        12/23/2025  11:09 AM            442 20251223180955_Initial.cs
+-a----        12/23/2025  11:09 AM            922 20251223180955_Initial.Design
+                                                  er.cs
+-a----        12/23/2025  11:58 AM           9061 20251223185855_InitialAuth.cs
+-a----        12/23/2025  11:58 AM          10527 20251223185855_InitialAuth.De
+                                                  signer.cs
+-a----        12/23/2025  12:05 PM          10327 20251223190519_InitialIdentit
+                                                  y.cs
+-a----        12/23/2025  12:05 PM          19869 20251223190519_InitialIdentit
+                                                  y.Designer.cs
+-a----        12/23/2025  12:04 PM            316 ApplicationDbContext.cs
+-a----        12/23/2025  10:12 AM            116 ApplicationUser.cs
+-a----        12/30/2025   8:26 AM            235 appsettings.Development.json
+-a----        12/30/2025   8:26 AM            222 appsettings.json
+-a----        12/23/2025   4:13 PM           1372 Auth.csproj
+-a----        12/30/2025   8:20 AM           4047 OpenIddictSeeder.cs
+-a----        12/30/2025   8:26 AM           4004 Program.cs
+    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----        12/23/2025   9:09 AM                Debug
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\Debug
+    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        12/17/2025   4:51 PM                net10.0
-d-----        12/23/2025   9:09 AM                net8.0
+d-----        12/30/2025   8:26 AM                net8.0
     Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\Debug\net10.0
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                cs
-d-----        12/11/2025  10:58 AM                de
-d-----        12/11/2025  10:58 AM                es
-d-----        12/11/2025  10:58 AM                fr
-d-----        12/11/2025  10:58 AM                it
-d-----        12/11/2025  10:58 AM                ja
-d-----        12/11/2025  10:58 AM                ko
-d-----        12/11/2025  10:58 AM                pl
-d-----        12/11/2025  10:58 AM                pt-BR
-d-----        12/11/2025  10:58 AM                ru
-d-----         12/5/2025   4:01 PM                runtimes
-d-----        12/11/2025  10:58 AM                tr
-d-----        12/11/2025  10:58 AM                zh-Hans
-d-----        12/11/2025  10:58 AM                zh-Hant
--a----        12/17/2025   4:42 PM          31594 Ad-platform.deps.json
--a----        12/17/2025   4:51 PM          48640 Ad-platform.dll
--a----        12/17/2025   4:51 PM         162304 Ad-platform.exe
--a----        12/17/2025   4:51 PM          29072 Ad-platform.pdb
--a----        12/11/2025  10:58 AM            488 Ad-platform.runtimeconfig.jso
-                                                  n
--a----        12/17/2025   4:42 PM         119466 Ad-platform.staticwebassets.e
-                                                  ndpoints.json
--a----        12/17/2025   4:42 PM          18209 Ad-platform.staticwebassets.r
-                                                  untime.json
--a----         12/5/2025   4:08 PM         106496 app.db
--a----         12/1/2025   1:18 PM            127 appsettings.Development.json
--a----         12/1/2025   1:18 PM            242 appsettings.json
+d-----        12/23/2025  10:36 AM                cs
+d-----        12/23/2025  10:36 AM                de
+d-----        12/23/2025  10:36 AM                es
+d-----        12/23/2025  10:36 AM                fr
+d-----        12/23/2025  10:36 AM                it
+d-----        12/23/2025  10:36 AM                ja
+d-----        12/23/2025  10:36 AM                ko
+d-----        12/23/2025  10:36 AM                pl
+d-----        12/23/2025  10:36 AM                pt-BR
+d-----        12/23/2025  10:36 AM                ru
+d-----        12/23/2025  10:36 AM                tr
+d-----        12/23/2025  10:36 AM                zh-Hans
+d-----        12/23/2025  10:36 AM                zh-Hant
+-a----        12/30/2025   8:26 AM            235 appsettings.Development.json
+-a----        12/30/2025   8:26 AM            222 appsettings.json
+-a----        12/29/2025   3:44 PM          69964 Auth.deps.json
+-a----        12/30/2025   8:26 AM         146944 Auth.dll
+-a----        12/30/2025   8:26 AM         151552 Auth.exe
+-a----        12/30/2025   8:26 AM          52172 Auth.pdb
+-a----        12/29/2025   3:44 PM            485 Auth.runtimeconfig.json
+-a----        12/23/2025   4:14 PM         105851 Auth.staticwebassets.endpoint
+                                                  s.json
+-a----        12/23/2025   4:14 PM          19278 Auth.staticwebassets.runtime.
+                                                  json
 -a----         1/29/2022   8:04 AM         355944 Humanizer.dll
--a----        10/31/2023   7:07 PM          81568 Microsoft.AspNetCore.Diagnost
-                                                  ics.EntityFrameworkCore.dll
--a----        10/31/2023   7:07 PM         108704 Microsoft.AspNetCore.Identity
+-a----        10/28/2025   5:30 AM          53008 Microsoft.AspNetCore.Cryptogr
+                                                  aphy.Internal.dll
+-a----        10/28/2025   5:30 AM          23816 Microsoft.AspNetCore.Cryptogr
+                                                  aphy.KeyDerivation.dll
+-a----        10/28/2025   5:30 AM         108808 Microsoft.AspNetCore.Identity
                                                   .EntityFrameworkCore.dll
--a----        10/31/2023   7:09 PM         933024 Microsoft.AspNetCore.Identity
+-a----        10/28/2025   5:35 AM         933176 Microsoft.AspNetCore.Identity
                                                   .UI.dll
 -a----        10/22/2021   5:47 PM          16000 Microsoft.Bcl.AsyncInterfaces
                                                   .dll
@@ -146,24 +81,123 @@ d-----        12/11/2025  10:58 AM                zh-Hant
 -a----          2/9/2023  12:34 PM        2856112 Microsoft.CodeAnalysis.dll
 -a----          2/9/2023  12:44 PM        3643568 Microsoft.CodeAnalysis.Worksp
                                                   aces.dll
--a----        10/31/2023   4:15 PM         173088 Microsoft.Data.Sqlite.dll
--a----        10/31/2023   4:15 PM          34848 Microsoft.EntityFrameworkCore
+-a----        10/28/2025   2:17 AM          34848 Microsoft.EntityFrameworkCore
                                                   .Abstractions.dll
--a----        10/31/2023   4:16 PM         484896 Microsoft.EntityFrameworkCore
+-a----        10/28/2025   2:18 AM         486432 Microsoft.EntityFrameworkCore
                                                   .Design.dll
--a----        10/31/2023   4:15 PM        2520096 Microsoft.EntityFrameworkCore
+-a----        10/28/2025   2:18 AM        2534944 Microsoft.EntityFrameworkCore
                                                   .dll
--a----        10/31/2023   4:16 PM        1980448 Microsoft.EntityFrameworkCore
+-a----        10/28/2025   2:18 AM        1995848 Microsoft.EntityFrameworkCore
                                                   .Relational.dll
--a----        10/31/2023   4:17 PM         255520 Microsoft.EntityFrameworkCore
-                                                  .Sqlite.dll
--a----        10/31/2023   8:59 AM          79624 Microsoft.Extensions.Dependen
+-a----         10/2/2024   4:14 PM          34360 Microsoft.Extensions.AmbientM
+                                                  etadata.Application.dll
+-a----         9/16/2024   5:10 PM          45832 Microsoft.Extensions.Caching.
+                                                  Memory.dll
+-a----         10/2/2024   4:14 PM          40504 Microsoft.Extensions.Complian
+                                                  ce.Abstractions.dll
+-a----         6/13/2024   1:35 PM          42784 Microsoft.Extensions.Configur
+                                                  ation.Binder.dll
+-a----         9/16/2024   5:09 PM          63768 Microsoft.Extensions.Dependen
+                                                  cyInjection.Abstractions.dll
+-a----         10/2/2024   4:14 PM          33848 Microsoft.Extensions.Dependen
+                                                  cyInjection.AutoActivation.dl
+                                                  l
+-a----         9/16/2024   5:09 PM          92952 Microsoft.Extensions.Dependen
+                                                  cyInjection.dll
+-a----         9/16/2024   5:09 PM          79664 Microsoft.Extensions.Dependen
                                                   cyModel.dll
+-a----         9/16/2024   5:10 PM          30480 Microsoft.Extensions.Diagnost
+                                                  ics.Abstractions.dll
+-a----         9/16/2024   5:10 PM          35592 Microsoft.Extensions.Diagnost
+                                                  ics.dll
+-a----         10/2/2024   4:14 PM          30264 Microsoft.Extensions.Diagnost
+                                                  ics.ExceptionSummarization.dl
+                                                  l
+-a----        10/28/2025   5:30 AM          35600 Microsoft.Extensions.FileProv
+                                                  iders.Embedded.dll
+-a----         9/16/2024   5:10 PM          51472 Microsoft.Extensions.Hosting.
+                                                  Abstractions.dll
+-a----         10/2/2024   4:16 PM         117304 Microsoft.Extensions.Http.Dia
+                                                  gnostics.dll
+-a----         9/16/2024   5:10 PM          88856 Microsoft.Extensions.Http.dll
+-a----         9/25/2025   8:20 PM          32544 Microsoft.Extensions.Http.Pol
+                                                  ly.dll
+-a----         10/2/2024   4:16 PM         131640 Microsoft.Extensions.Http.Res
+                                                  ilience.dll
+-a----        10/28/2025   5:30 AM         177936 Microsoft.Extensions.Identity
+                                                  .Core.dll
+-a----        10/28/2025   5:30 AM          45320 Microsoft.Extensions.Identity
+                                                  .Stores.dll
+-a----         9/16/2024   5:09 PM          65320 Microsoft.Extensions.Logging.
+                                                  Abstractions.dll
+-a----         9/16/2024   5:10 PM          27912 Microsoft.Extensions.Logging.
+                                                  Configuration.dll
+-a----         9/16/2024   5:10 PM          50976 Microsoft.Extensions.Logging.
+                                                  dll
+-a----         9/18/2024  12:38 PM          22816 Microsoft.Extensions.ObjectPo
+                                                  ol.dll
+-a----         1/17/2024   8:05 PM          64776 Microsoft.Extensions.Options.
+                                                  dll
+-a----         10/2/2024   4:15 PM          32312 Microsoft.Extensions.Resilien
+                                                  ce.dll
+-a----         10/2/2024   4:15 PM          55352 Microsoft.Extensions.Telemetr
+                                                  y.Abstractions.dll
+-a----         10/2/2024   4:16 PM         113720 Microsoft.Extensions.Telemetr
+                                                  y.dll
+-a----         8/15/2025   3:52 PM          19528 Microsoft.IdentityModel.Abstr
+                                                  actions.dll
+-a----         8/15/2025   3:52 PM         171552 Microsoft.IdentityModel.JsonW
+                                                  ebTokens.dll
+-a----         8/15/2025   3:51 PM          36896 Microsoft.IdentityModel.Loggi
+                                                  ng.dll
+-a----         8/15/2025   3:52 PM          53296 Microsoft.IdentityModel.Proto
+                                                  cols.dll
+-a----         8/15/2025   3:51 PM         385568 Microsoft.IdentityModel.Token
+                                                  s.dll
+-a----        12/11/2023   2:53 PM          65568 Microsoft.IO.RecyclableMemory
+                                                  Stream.dll
+-a----         9/25/2025   8:19 PM          84744 Microsoft.Net.Http.Headers.dl
+                                                  l
 -a----         2/22/2021   8:04 PM         114688 Mono.TextTemplating.dll
--a----         8/23/2023  12:41 PM           5120 SQLitePCLRaw.batteries_v2.dll
--a----         8/23/2023  12:38 PM          50688 SQLitePCLRaw.core.dll
--a----         8/23/2023  12:38 PM          35840 SQLitePCLRaw.provider.e_sqlit
-                                                  e3.dll
+-a----        11/18/2024   9:58 AM        1406976 Npgsql.dll
+-a----        11/18/2024  10:26 AM         623616 Npgsql.EntityFrameworkCore.Po
+                                                  stgreSQL.dll
+-a----        11/11/2025   1:37 PM         376320 OpenIddict.Abstractions.dll
+-a----        11/11/2025   1:40 PM          90624 OpenIddict.Client.AspNetCore.
+                                                  dll
+-a----        11/11/2025   1:40 PM          54784 OpenIddict.Client.DataProtect
+                                                  ion.dll
+-a----        11/11/2025   1:39 PM         507392 OpenIddict.Client.dll
+-a----        11/11/2025   1:40 PM         123392 OpenIddict.Client.SystemInteg
+                                                  ration.dll
+-a----        11/11/2025   1:39 PM          95744 OpenIddict.Client.SystemNetHt
+                                                  tp.dll
+-a----        11/11/2025   1:41 PM         785408 OpenIddict.Client.WebIntegrat
+                                                  ion.dll
+-a----        11/11/2025   1:38 PM         331776 OpenIddict.Core.dll
+-a----        11/11/2025   1:38 PM         260608 OpenIddict.EntityFrameworkCor
+                                                  e.dll
+-a----        11/11/2025   1:37 PM          15872 OpenIddict.EntityFrameworkCor
+                                                  e.Models.dll
+-a----        11/11/2025   1:38 PM         100864 OpenIddict.Server.AspNetCore.
+                                                  dll
+-a----        11/11/2025   1:38 PM          62464 OpenIddict.Server.DataProtect
+                                                  ion.dll
+-a----        11/11/2025   1:38 PM         507904 OpenIddict.Server.dll
+-a----        11/11/2025   1:40 PM          58880 OpenIddict.Validation.AspNetC
+                                                  ore.dll
+-a----        11/11/2025   1:40 PM          48640 OpenIddict.Validation.DataPro
+                                                  tection.dll
+-a----        11/11/2025   1:38 PM         160768 OpenIddict.Validation.dll
+-a----        11/11/2025   1:41 PM          35328 OpenIddict.Validation.ServerI
+                                                  ntegration.dll
+-a----        11/11/2025   1:40 PM          78848 OpenIddict.Validation.SystemN
+                                                  etHttp.dll
+-a----         9/26/2024  10:40 AM         242736 Polly.Core.dll
+-a----         6/13/2023   7:46 AM         287984 Polly.dll
+-a----         9/26/2024  10:40 AM          57120 Polly.Extensions.dll
+-a----         3/31/2019   9:06 AM           6144 Polly.Extensions.Http.dll
+-a----         9/26/2024  10:40 AM          28208 Polly.RateLimiting.dll
 -a----         7/19/2017   4:01 AM         187224 System.CodeDom.dll
 -a----        10/22/2021   5:47 PM          18536 System.Composition.Attributed
                                                   Model.dll
@@ -175,8 +209,8 @@ d-----        12/11/2025  10:58 AM                zh-Hant
                                                   l
 -a----        10/22/2021   5:48 PM          61032 System.Composition.TypedParts
                                                   .dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\cs
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\cs
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         395440 Microsoft.CodeAnalysis.CSharp
@@ -187,8 +221,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          47744 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\de
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\de
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         425632 Microsoft.CodeAnalysis.CSharp
@@ -199,8 +233,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          49784 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\es
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\es
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         415904 Microsoft.CodeAnalysis.CSharp
@@ -211,8 +245,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          49272 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\fr
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\fr
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         425648 Microsoft.CodeAnalysis.CSharp
@@ -223,8 +257,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          50320 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\it
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\it
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         422576 Microsoft.CodeAnalysis.CSharp
@@ -235,8 +269,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          49792 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\ja
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\ja
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         465056 Microsoft.CodeAnalysis.CSharp
@@ -247,8 +281,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          52856 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\ko
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\ko
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         427696 Microsoft.CodeAnalysis.CSharp
@@ -259,8 +293,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          49784 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\pl
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\pl
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         428208 Microsoft.CodeAnalysis.CSharp
@@ -271,8 +305,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          49808 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\pt-BR
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\pt-BR
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         408736 Microsoft.CodeAnalysis.CSharp
@@ -283,8 +317,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          49280 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\ru
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\ru
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         562336 Microsoft.CodeAnalysis.CSharp
@@ -295,267 +329,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          56976 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:01 PM                browser-wasm
-d-----         12/5/2025   4:01 PM                linux-arm
-d-----         12/5/2025   4:01 PM                linux-arm64
-d-----         12/5/2025   4:01 PM                linux-armel
-d-----         12/5/2025   4:01 PM                linux-mips64
-d-----         12/5/2025   4:01 PM                linux-musl-arm
-d-----         12/5/2025   4:01 PM                linux-musl-arm64
-d-----         12/5/2025   4:01 PM                linux-musl-riscv64
-d-----         12/5/2025   4:01 PM                linux-musl-s390x
-d-----         12/5/2025   4:01 PM                linux-musl-x64
-d-----         12/5/2025   4:01 PM                linux-ppc64le
-d-----         12/5/2025   4:01 PM                linux-riscv64
-d-----         12/5/2025   4:01 PM                linux-s390x
-d-----         12/5/2025   4:01 PM                linux-x64
-d-----         12/5/2025   4:01 PM                linux-x86
-d-----         12/5/2025   4:01 PM                maccatalyst-arm64
-d-----         12/5/2025   4:01 PM                maccatalyst-x64
-d-----         12/5/2025   4:01 PM                osx-arm64
-d-----         12/5/2025   4:01 PM                osx-x64
-d-----         12/5/2025   4:01 PM                win
-d-----         12/5/2025   4:01 PM                win-arm
-d-----         12/5/2025   4:01 PM                win-arm64
-d-----         12/5/2025   4:01 PM                win-x64
-d-----         12/5/2025   4:01 PM                win-x86
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\browser-wasm
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                nativeassets
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\browser-wasm\nativeassets
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                net8.0
-d-----        12/11/2025  10:58 AM                net9.0
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\browser-wasm\nativeassets\net8.0
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1122394 e_sqlite3.a
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-arm
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-arm\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM         827568 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-arm64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-arm64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1285800 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-armel
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-armel\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1162812 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-mips64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-mips64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1500256 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-arm
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-arm\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1126664 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-arm64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-arm64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1333800 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-riscv64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-s390x
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-x64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-musl-x64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1228752 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-ppc64le
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-ppc64le\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1648888 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-riscv64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-s390x
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-s390x\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1397832 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-x64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-x64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1249880 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-x86
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\linux-x86\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1309268 libe_sqlite3.so
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\maccatalyst-arm64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\maccatalyst-arm64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1091295 libe_sqlite3.dylib
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\maccatalyst-x64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\maccatalyst-x64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1117336 libe_sqlite3.dylib
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\osx-arm64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\osx-arm64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1091359 libe_sqlite3.dylib
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\osx-x64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\osx-x64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1116192 libe_sqlite3.dylib
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:01 PM                lib
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win\lib
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                net9.0
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-arm
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-arm\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1192960 e_sqlite3.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-arm64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-arm64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1485824 e_sqlite3.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-x64
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-x64\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1691648 e_sqlite3.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-x86
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  10:58 AM                native
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\runtimes\win-x86\native
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         8/23/2023  12:33 PM        1308672 e_sqlite3.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\tr
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\tr
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         405664 Microsoft.CodeAnalysis.CSharp
@@ -566,8 +341,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          48256 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\zh-Hans
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\zh-Hans
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         360624 Microsoft.CodeAnalysis.CSharp
@@ -578,8 +353,8 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          45696 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\bin\De
-    bug\net10.0\zh-Hant
+    Directory:
+    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0\zh-Hant
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----          2/9/2023  12:54 PM         360608 Microsoft.CodeAnalysis.CSharp
@@ -590,345 +365,16 @@ Mode                 LastWriteTime         Length Name
                                                   ces.dll
 -a----          2/9/2023  12:44 PM          45712 Microsoft.CodeAnalysis.Worksp
                                                   aces.resources.dll
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\Controllers
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/1/2025   1:19 PM            571 HomeController.cs
--a----        12/17/2025   4:49 PM            482 UserController.cs
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\Data
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/1/2025   1:19 PM                Migrations
--a----         12/1/2025   1:19 PM            248 ApplicationDbContext.cs
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\Data\Migrations
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/1/2025   1:19 PM           9355 00000000000000_CreateIdentity
-                                                  Schema.cs
--a----         12/1/2025   1:19 PM           9196 00000000000000_CreateIdentity
-                                                  Schema.Designer.cs
--a----         12/1/2025   1:19 PM           9114 ApplicationDbContextModelSnap
-                                                  shot.cs
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\Models
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/1/2025   1:19 PM            180 ErrorViewModel.cs
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/23/2025   9:09 AM                Debug
--a----        12/23/2025   9:09 AM           3010 Ad-platform.csproj.nuget.dgsp
-                                                  ec.json
--a----         12/5/2025   4:42 PM           2565 Ad-platform.csproj.nuget.g.pr
-                                                  ops
--a----        12/23/2025   9:09 AM           1631 Ad-platform.csproj.nuget.g.ta
-                                                  rgets
--a----        12/23/2025  10:09 AM         146563 project.assets.json
--a----        12/23/2025  10:09 AM           7843 project.nuget.cache
--a----        12/23/2025   9:09 AM           1537 project.packagespec.json
--a----        12/23/2025  10:17 AM             20 rider.project.model.nuget.inf
-                                                  o
--a----        12/23/2025  10:17 AM             20 rider.project.restore.info
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\Debug
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/17/2025   4:51 PM                net10.0
-d-----        12/23/2025   9:09 AM                net8.0
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\Debug\net10.0
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/17/2025   4:42 PM                compressed
-d-----         12/5/2025   4:01 PM                ref
-d-----         12/5/2025   4:01 PM                refint
-d-----         12/5/2025   4:01 PM                scopedcss
-d-----         12/5/2025   4:01 PM                staticwebassets
--a----         12/1/2025   1:19 PM            200 .NETCoreApp,Version=v10.0.Ass
-                                                  emblyAttributes.cs
--a----        12/11/2025  10:58 AM              0 Ad-platf.62FE41D2.Up2Date
--a----         12/1/2025   1:19 PM           1189 Ad-platform.AssemblyInfo.cs
--a----         12/1/2025   1:19 PM             66 Ad-platform.AssemblyInfoInput
-                                                  s.cache
--a----         12/5/2025   4:42 PM          41784 Ad-platform.assets.cache
--a----         12/5/2025   4:42 PM          13015 Ad-platform.csproj.AssemblyRe
-                                                  ference.cache
--a----        12/17/2025   4:42 PM             66 Ad-platform.csproj.CoreCompil
-                                                  eInputs.cache
--a----        12/17/2025   4:42 PM          23011 Ad-platform.csproj.FileListAb
-                                                  solute.txt
--a----        12/17/2025   4:51 PM          48640 Ad-platform.dll
--a----        12/15/2025   8:45 AM           1153 Ad-platform.GeneratedMSBuildE
-                                                  ditorConfig.editorconfig
--a----         12/5/2025   4:01 PM             66 Ad-platform.genruntimeconfig.
-                                                  cache
--a----         12/1/2025   1:19 PM            642 Ad-platform.GlobalUsings.g.cs
--a----        12/17/2025   4:42 PM              0 Ad-platform.MvcApplicationPar
-                                                  tsAssemblyInfo.cache
--a----        12/17/2025   4:42 PM            584 Ad-platform.MvcApplicationPar
-                                                  tsAssemblyInfo.cs
--a----        12/17/2025   4:51 PM          29072 Ad-platform.pdb
--a----        12/17/2025   4:51 PM         162304 apphost.exe
--a----        12/17/2025   4:42 PM          74225 rbcswa.dswa.cache.json
--a----         12/5/2025   4:01 PM           3436 rjimswa.dswa.cache.json
--a----        12/17/2025   4:51 PM            515 rjsmcshtml.dswa.cache.json
--a----        12/17/2025   4:51 PM            515 rjsmrazor.dswa.cache.json
--a----        12/17/2025   4:42 PM            369 rpswa.dswa.cache.json
--a----        12/17/2025   4:42 PM         119466 staticwebassets.build.endpoin
-                                                  ts.json
--a----        12/17/2025   4:42 PM         260480 staticwebassets.build.json
--a----        12/17/2025   4:42 PM             44 staticwebassets.build.json.ca
-                                                  che
--a----        12/17/2025   4:42 PM          18209 staticwebassets.development.j
-                                                  son
--a----         12/5/2025   4:01 PM              0 swae.build.ex.cache
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\De
-    bug\net10.0\compressed
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        12/11/2025  10:58 AM          43128 0k1i85ntyh-{0}-l2av4jpuoj-l2a
-                                                  v4jpuoj.gz
--a----        12/11/2025  10:58 AM           6691 14ipv7q33s-{0}-agp80tu62r-agp
-                                                  80tu62r.gz
--a----        12/11/2025  10:58 AM           7777 1fc4q00scq-{0}-tey0rigmnh-tey
-                                                  0rigmnh.gz
--a----        12/11/2025  10:58 AM           7976 2tikzqlmtu-{0}-b7iojwaux1-b7i
-                                                  ojwaux1.gz
--a----        12/11/2025  10:58 AM           4651 362sl0bktu-{0}-47otxtyo56-47o
-                                                  txtyo56.gz
--a----        12/11/2025  10:58 AM           1970 3tzsqhslk9-{0}-7na4sro3qu-7na
-                                                  4sro3qu.gz
--a----        12/11/2025  10:58 AM          98452 47012z8l2l-{0}-73kdqttayv-73k
-                                                  dqttayv.gz
--a----        12/11/2025  10:58 AM          23872 4vzefxwp2m-{0}-bpk8xqwxhs-bpk
-                                                  8xqwxhs.gz
--a----        12/11/2025  10:58 AM           7726 7o8oyvng68-{0}-b4skse8du6-b4s
-                                                  kse8du6.gz
--a----        12/11/2025  10:58 AM           9578 8axix7wldr-{0}-okkk44j0xs-okk
-                                                  k44j0xs.gz
--a----        12/11/2025  10:58 AM          31876 8xykfy6qmd-{0}-j75batdsum-j75
-                                                  batdsum.gz
--a----        12/11/2025  10:58 AM          13795 9glsckmvxo-{0}-5vj65cig9w-5vj
-                                                  65cig9w.gz
--a----         12/5/2025   4:01 PM            683 9muusbdg0a-{0}-x0q3zqp4vz-x0q
-                                                  3zqp4vz.gz
--a----        12/11/2025  10:58 AM          55652 b9lhb08218-{0}-5pze98is44-5pz
-                                                  e98is44.gz
--a----        12/11/2025  10:58 AM          74664 bh4v3mdph9-{0}-8inm30yfxf-8in
-                                                  m30yfxf.gz
--a----        12/11/2025  10:58 AM          31672 bww8ud00yd-{0}-2q4vfeazbq-2q4
-                                                  vfeazbq.gz
--a----        12/11/2025  10:58 AM          14159 cynp17w084-{0}-vy0bq9ydhf-vy0
-                                                  bq9ydhf.gz
--a----        12/11/2025  10:58 AM           1952 d5z9sfpxbi-{0}-0wve5yxp74-0wv
-                                                  e5yxp74.gz
--a----        12/11/2025  10:58 AM           5917 eb27mqwgz2-{0}-unj9p35syc-unj
-                                                  9p35syc.gz
--a----        12/11/2025  10:58 AM           5919 edcrak57d7-{0}-n1oizzvkh6-n1o
-                                                  izzvkh6.gz
--a----        12/11/2025  10:58 AM          31861 h9vwtoirpy-{0}-ab1c3rmv7g-ab1
-                                                  c3rmv7g.gz
--a----        12/11/2025  10:58 AM           6695 hh8ihyobdx-{0}-q2ku51ktnl-q2k
-                                                  u51ktnl.gz
--a----        12/11/2025  10:58 AM          27871 higufxz8op-{0}-m39kt2b5c9-m39
-                                                  kt2b5c9.gz
--a----        12/11/2025  10:58 AM          67504 igscs4x0yk-{0}-6ukhryfubh-6uk
-                                                  hryfubh.gz
--a----        12/11/2025  10:58 AM          84920 ivy2s9gwh5-{0}-c2nslu3uf3-c2n
-                                                  slu3uf3.gz
--a----        12/11/2025  10:58 AM          14121 iznc766avz-{0}-56d2bn4wt9-56d
-                                                  2bn4wt9.gz
--a----         12/5/2025   4:01 PM           9541 j9swiz3yzq-{0}-90yqlj465b-90y
-                                                  qlj465b.gz
--a----        12/11/2025  10:58 AM           1791 k8b25g0zwc-{0}-f8imaxxbri-f8i
-                                                  maxxbri.gz
--a----        12/11/2025  10:58 AM          25970 l186vlgaag-{0}-ve6x09088i-ve6
-                                                  x09088i.gz
--a----         12/5/2025   4:01 PM            694 ldxy2n3w6q-{0}-356vix0kms-356
-                                                  vix0kms.gz
--a----        12/11/2025  10:58 AM          22629 lr5hmrr0j7-{0}-25iw1kog22-25i
-                                                  w1kog22.gz
--a----        12/11/2025  10:58 AM           9748 nlrl0f3xs3-{0}-wmug9u23qg-wmu
-                                                  g9u23qg.gz
--a----        12/11/2025  10:58 AM          26131 ns4583i71s-{0}-mpyigms19s-mpy
-                                                  igms19s.gz
--a----        12/11/2025  10:58 AM           7000 o5k23vqhrk-{0}-u3xrusw2ol-u3x
-                                                  rusw2ol.gz
--a----        12/11/2025  10:58 AM            658 ofa40bqe71-{0}-o84wqeh1og-o84
-                                                  wqeh1og.gz
--a----        12/11/2025  10:58 AM          22018 oxk5o6czdw-{0}-jeal3x0ldm-jea
-                                                  l3x0ldm.gz
--a----        12/11/2025  10:58 AM          54118 pogzkicjpz-{0}-u33ctipx7g-u33
-                                                  ctipx7g.gz
--a----        12/11/2025  10:58 AM         100848 qfr28sqcy1-{0}-fctod5rc9n-fct
-                                                  od5rc9n.gz
--a----        12/11/2025  10:58 AM          31676 rh65p086id-{0}-st1cbwfwo5-st1
-                                                  cbwfwo5.gz
--a----        12/11/2025  10:58 AM          98418 rsc7qacj1u-{0}-4gxs3k148c-4gx
-                                                  s3k148c.gz
--a----        12/11/2025  10:58 AM          67153 s3tglgz8hr-{0}-2lgwfvgpvi-2lg
-                                                  wfvgpvi.gz
--a----        12/11/2025  10:58 AM          13802 sf8kf2lula-{0}-o371a8zbv2-o37
-                                                  1a8zbv2.gz
--a----        12/11/2025  10:58 AM          31233 t0qo7o574p-{0}-dd6z7egasc-dd6
-                                                  z7egasc.gz
--a----        12/11/2025  10:58 AM           6523 t6e3b82hrf-{0}-9oaff4kq20-9oa
-                                                  ff4kq20.gz
--a----        12/11/2025  10:58 AM           1816 tg53r17ghy-{0}-npxfuf8dg6-npx
-                                                  fuf8dg6.gz
--a----        12/11/2025  10:58 AM          85573 tpsq5dibur-{0}-fwhahm2icz-fwh
-                                                  ahm2icz.gz
--a----        12/11/2025  10:58 AM          22026 u8428c4e9i-{0}-cwzlr5n8x4-cwz
-                                                  lr5n8x4.gz
--a----        12/11/2025  10:58 AM          13793 uocis9wxbx-{0}-pzqfkb6aqo-pzq
-                                                  fkb6aqo.gz
--a----         12/5/2025   4:01 PM            189 vltxs1u3vm-{0}-xtxxf3hu2r-xtx
-                                                  xf3hu2r.gz
--a----        12/11/2025  10:58 AM           2207 vov7uhd1ha-{0}-4v8eqarkd7-4v8
-                                                  eqarkd7.gz
--a----        12/11/2025  10:58 AM           7022 vsrbd71spn-{0}-16095smhkz-160
-                                                  95smhkz.gz
--a----        12/11/2025  10:58 AM          18461 vw9sls9bhj-{0}-um2aeqy4ik-um2
-                                                  aeqy4ik.gz
--a----        12/11/2025  10:58 AM          95982 xa379ftczi-{0}-kbynt5jhd9-kby
-                                                  nt5jhd9.gz
--a----         12/5/2025   4:01 PM            682 yfc7ypekbg-{0}-mlv21k5csn-mlv
-                                                  21k5csn.gz
--a----        12/11/2025  10:58 AM          55521 ym8tkpcl2i-{0}-wsezl0heh6-wse
-                                                  zl0heh6.gz
--a----        12/11/2025  10:58 AM          14080 ypthv7q62w-{0}-ay5nd8zt9x-ay5
-                                                  nd8zt9x.gz
--a----        12/11/2025  10:58 AM          23897 z408qb6q7a-{0}-9b9oa1qrmt-9b9
-                                                  oa1qrmt.gz
--a----        12/11/2025  10:58 AM          15909 zap00c0tb5-{0}-zwph15dxgs-zwp
-                                                  h15dxgs.gz
--a----        12/11/2025  10:58 AM          28609 zzna4nrm5w-{0}-o4kw7cc6tf-o4k
-                                                  w7cc6tf.gz
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\De
-    bug\net10.0\ref
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        12/17/2025   4:42 PM          10752 Ad-platform.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\De
-    bug\net10.0\refint
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        12/17/2025   4:51 PM          10752 Ad-platform.dll
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\De
-    bug\net10.0\scopedcss
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         12/5/2025   4:01 PM                bundle
-d-----        12/11/2025  11:40 AM                projectbundle
-d-----         12/5/2025   4:01 PM                Views
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\De
-    bug\net10.0\scopedcss\bundle
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/5/2025   4:01 PM           1109 Ad-platform.styles.css
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\De
-    bug\net10.0\scopedcss\Views
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/11/2025  11:40 AM                Shared
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\obj\Debug\net8.0
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/23/2025   9:09 AM                ref
-d-----        12/23/2025   9:09 AM                refint
--a----        12/23/2025   9:09 AM            198 .NETCoreApp,Version=v8.0.Asse
-                                                  mblyAttributes.cs
--a----        12/23/2025   9:09 AM           1189 Ad-platform.AssemblyInfo.cs
--a----        12/23/2025   9:09 AM             66 Ad-platform.AssemblyInfoInput
-                                                  s.cache
--a----        12/23/2025  10:09 AM          56791 Ad-platform.assets.cache
--a----        12/23/2025   9:09 AM          13015 Ad-platform.csproj.AssemblyRe
-                                                  ference.cache
--a----        12/23/2025   9:09 AM           1150 Ad-platform.GeneratedMSBuildE
-                                                  ditorConfig.editorconfig
--a----        12/23/2025   9:09 AM            642 Ad-platform.GlobalUsings.g.cs
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Ad-platform\Properties
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----         12/1/2025   1:18 PM            642 launchSettings.json
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/23/2025   9:09 AM                bin
-d-----        12/23/2025   9:09 AM                Controllers
-d-----        12/23/2025   9:09 AM                Models
-d-----        12/23/2025  10:09 AM                obj
-d-----        12/23/2025   9:09 AM                Properties
-d-----        12/23/2025   9:09 AM                Views
-d-----        12/23/2025   9:09 AM                wwwroot
--a----        12/23/2025   9:53 AM            233 ApplicationDbContext.cs
--a----        12/23/2025  10:12 AM            116 ApplicationUser.cs
--a----        12/23/2025   9:36 AM            127 appsettings.Development.json
--a----        12/23/2025   9:09 AM            151 appsettings.json
--a----        12/23/2025  10:09 AM            631 Auth.csproj
--a----        12/23/2025  10:08 AM           1307 Program.cs
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/23/2025   9:09 AM                Debug
-    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----        12/23/2025  10:15 AM                net8.0
-    Directory:
-    C:\Users\joe\projects\ad-platform\Ad-platform\Auth\bin\Debug\net8.0
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        12/23/2025   9:36 AM            127 appsettings.Development.json
--a----        12/23/2025   9:09 AM            151 appsettings.json
--a----        12/23/2025  10:15 AM          12982 Auth.deps.json
--a----        12/23/2025  10:15 AM          48128 Auth.dll
--a----        12/23/2025  10:15 AM         151552 Auth.exe
--a----        12/23/2025  10:15 AM          36116 Auth.pdb
--a----        12/23/2025  10:15 AM            485 Auth.runtimeconfig.json
--a----        12/23/2025   9:33 AM          73107 Auth.staticwebassets.endpoint
-                                                  s.json
--a----        12/23/2025   9:33 AM           9759 Auth.staticwebassets.runtime.
-                                                  json
--a----        10/28/2025   5:30 AM          53008 Microsoft.AspNetCore.Cryptogr
-                                                  aphy.Internal.dll
--a----        10/28/2025   5:30 AM          23816 Microsoft.AspNetCore.Cryptogr
-                                                  aphy.KeyDerivation.dll
--a----        10/28/2025   5:30 AM         108808 Microsoft.AspNetCore.Identity
-                                                  .EntityFrameworkCore.dll
--a----        10/28/2025   2:17 AM          34848 Microsoft.EntityFrameworkCore
-                                                  .Abstractions.dll
--a----        10/28/2025   2:18 AM        2534944 Microsoft.EntityFrameworkCore
-                                                  .dll
--a----        10/28/2025   2:18 AM        1995848 Microsoft.EntityFrameworkCore
-                                                  .Relational.dll
--a----         9/16/2024   5:10 PM          45832 Microsoft.Extensions.Caching.
-                                                  Memory.dll
--a----         9/16/2024   5:09 PM          63768 Microsoft.Extensions.Dependen
-                                                  cyInjection.Abstractions.dll
--a----         9/16/2024   5:09 PM          92952 Microsoft.Extensions.Dependen
-                                                  cyInjection.dll
--a----        10/28/2025   5:30 AM         177936 Microsoft.Extensions.Identity
-                                                  .Core.dll
--a----        10/28/2025   5:30 AM          45320 Microsoft.Extensions.Identity
-                                                  .Stores.dll
--a----         9/16/2024   5:09 PM          65320 Microsoft.Extensions.Logging.
-                                                  Abstractions.dll
--a----         9/16/2024   5:10 PM          50976 Microsoft.Extensions.Logging.
-                                                  dll
--a----         1/17/2024   8:05 PM          64776 Microsoft.Extensions.Options.
-                                                  dll
--a----        11/18/2024   9:58 AM        1406976 Npgsql.dll
--a----        11/18/2024  10:26 AM         623616 Npgsql.EntityFrameworkCore.Po
-                                                  stgreSQL.dll
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\Controllers
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
+-a----        12/29/2025   4:56 PM           5926 AuthorizationController.cs
 -a----        12/23/2025   9:09 AM            716 HomeController.cs
+    Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\Migrations
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        12/23/2025  12:05 PM          19769 ApplicationDbContextModelSnap
+                                                  shot.cs
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\Models
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -937,19 +383,21 @@ Mode                 LastWriteTime         Length Name
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----        12/23/2025   9:09 AM                Debug
--a----        12/23/2025  10:09 AM           2636 Auth.csproj.nuget.dgspec.json
--a----        12/23/2025  10:07 AM           1502 Auth.csproj.nuget.g.props
--a----        12/23/2025  10:07 AM            857 Auth.csproj.nuget.g.targets
--a----        12/23/2025  10:09 AM          42889 project.assets.json
--a----        12/23/2025  10:09 AM           3147 project.nuget.cache
--a----        12/23/2025  10:09 AM           1317 project.packagespec.json
--a----        12/23/2025  10:17 AM             20 rider.project.model.nuget.inf
+-a----        12/23/2025  12:05 PM           1729 Auth.csproj.EntityFrameworkCo
+                                                  re.targets
+-a----        12/23/2025   4:13 PM           3715 Auth.csproj.nuget.dgspec.json
+-a----        12/23/2025   4:13 PM           2684 Auth.csproj.nuget.g.props
+-a----        12/23/2025   4:13 PM           2129 Auth.csproj.nuget.g.targets
+-a----        12/29/2025   3:36 PM         223904 project.assets.json
+-a----        12/29/2025   3:36 PM          13525 project.nuget.cache
+-a----        12/23/2025   4:13 PM           1921 project.packagespec.json
+-a----        12/29/2025   9:36 AM             20 rider.project.model.nuget.inf
                                                   o
--a----        12/23/2025  10:17 AM             20 rider.project.restore.info
+-a----        12/29/2025   3:36 PM             20 rider.project.restore.info
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        12/23/2025  10:15 AM                net8.0
+d-----        12/30/2025   8:26 AM                net8.0
     Directory:
     C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug\net8.0
 Mode                 LastWriteTime         Length Name
@@ -957,52 +405,55 @@ Mode                 LastWriteTime         Length Name
 d-----        12/23/2025   9:33 AM                ref
 d-----        12/23/2025   9:33 AM                refint
 d-----        12/23/2025   9:33 AM                scopedcss
-d-----        12/23/2025   9:33 AM                staticwebassets
+d-----        12/23/2025   1:21 PM                staticwebassets
 -a----        12/23/2025   9:09 AM            198 .NETCoreApp,Version=v8.0.Asse
                                                   mblyAttributes.cs
--a----        12/23/2025  10:15 AM         151552 apphost.exe
--a----        12/23/2025  10:07 AM           1068 Auth.AssemblyInfo.cs
--a----        12/23/2025  10:07 AM             66 Auth.AssemblyInfoInputs.cache
--a----        12/23/2025  10:09 AM          13920 Auth.assets.cache
--a----        12/23/2025  10:09 AM           3081 Auth.csproj.AssemblyReference
+-a----        12/30/2025   8:26 AM         151552 apphost.exe
+-a----        12/30/2025   8:26 AM           1190 Auth.AssemblyInfo.cs
+-a----        12/30/2025   8:26 AM             66 Auth.AssemblyInfoInputs.cache
+-a----        12/29/2025   3:36 PM          73775 Auth.assets.cache
+-a----        12/23/2025   4:13 PM          29991 Auth.csproj.AssemblyReference
                                                   .cache
--a----        12/23/2025  10:15 AM             66 Auth.csproj.CoreCompileInputs
+-a----        12/23/2025   4:14 PM             66 Auth.csproj.CoreCompileInputs
                                                   .cache
--a----        12/23/2025  10:15 AM           5106 Auth.csproj.FileListAbsolute.
+-a----        12/23/2025   4:14 PM          18200 Auth.csproj.FileListAbsolute.
                                                   txt
--a----        12/23/2025  10:15 AM              0 Auth.csproj.Up2Date
--a----        12/23/2025  10:15 AM          48128 Auth.dll
--a----        12/23/2025   9:09 AM           2624 Auth.GeneratedMSBuildEditorCo
+-a----        12/23/2025   4:14 PM              0 Auth.csproj.Up2Date
+-a----        12/30/2025   8:26 AM         146944 Auth.dll
+-a----        12/23/2025   4:24 PM           2848 Auth.GeneratedMSBuildEditorCo
                                                   nfig.editorconfig
 -a----        12/23/2025  10:15 AM             66 Auth.genruntimeconfig.cache
--a----        12/23/2025   9:09 AM            642 Auth.GlobalUsings.g.cs
--a----        12/23/2025  10:15 AM              0 Auth.MvcApplicationPartsAssem
+-a----        12/23/2025   1:21 PM            642 Auth.GlobalUsings.g.cs
+-a----        12/29/2025   3:44 PM              0 Auth.MvcApplicationPartsAssem
                                                   blyInfo.cache
--a----        12/23/2025  10:15 AM          36116 Auth.pdb
+-a----        12/29/2025   3:44 PM            584 Auth.MvcApplicationPartsAssem
+                                                  blyInfo.cs
+-a----        12/30/2025   8:26 AM          52172 Auth.pdb
 -a----        12/23/2025   9:09 AM             66 Auth.RazorAssemblyInfo.cache
 -a----        12/23/2025   9:09 AM            694 Auth.RazorAssemblyInfo.cs
--a----        12/23/2025   9:33 AM           3325 rjimswa.dswa.cache.json
--a----        12/23/2025  10:15 AM           3874 rjsmcshtml.dswa.cache.json
--a----        12/23/2025  10:15 AM           3874 rjsmrazor.dswa.cache.json
--a----        12/23/2025   9:38 AM          56787 rpswa.dswa.cache.json
--a----        12/23/2025   9:33 AM          73107 staticwebassets.build.endpoin
+-a----        12/30/2025   8:26 AM            178 Auth.sourcelink.json
+-a----        12/23/2025   1:21 PM           3325 rjimswa.dswa.cache.json
+-a----        12/30/2025   8:26 AM           3931 rjsmcshtml.dswa.cache.json
+-a----        12/30/2025   8:26 AM           3931 rjsmrazor.dswa.cache.json
+-a----        12/30/2025   8:35 AM          56834 rpswa.dswa.cache.json
+-a----        12/23/2025   4:14 PM         105851 staticwebassets.build.endpoin
                                                   ts.json
--a----        12/23/2025   9:33 AM         134128 staticwebassets.build.json
--a----        12/23/2025   9:33 AM             44 staticwebassets.build.json.ca
+-a----        12/23/2025   4:14 PM         231011 staticwebassets.build.json
+-a----        12/23/2025   4:14 PM             44 staticwebassets.build.json.ca
                                                   che
--a----        12/23/2025   9:33 AM           9759 staticwebassets.development.j
+-a----        12/23/2025   4:14 PM          19278 staticwebassets.development.j
                                                   son
--a----        12/23/2025   9:33 AM              0 swae.build.ex.cache
+-a----        12/23/2025   1:21 PM              0 swae.build.ex.cache
     Directory:
     C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug\net8.0\ref
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        12/23/2025  10:15 AM          15360 Auth.dll
+-a----        12/30/2025   8:26 AM          23552 Auth.dll
     Directory:
     C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug\net8.0\refint
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        12/23/2025  10:15 AM          15360 Auth.dll
+-a----        12/30/2025   8:26 AM          23552 Auth.dll
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug\net
     8.0\scopedcss
 Mode                 LastWriteTime         Length Name
@@ -1014,12 +465,12 @@ d-----        12/23/2025   9:33 AM                Views
     8.0\scopedcss\bundle
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        12/23/2025   9:33 AM           1109 Auth.styles.css
+-a----        12/23/2025   1:21 PM           1109 Auth.styles.css
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug\net
     8.0\scopedcss\projectbundle
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        12/23/2025   9:33 AM           1109 Auth.bundle.scp.css
+-a----        12/23/2025   1:21 PM           1109 Auth.bundle.scp.css
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\obj\Debug\net
     8.0\scopedcss\Views
 Mode                 LastWriteTime         Length Name
@@ -1038,7 +489,7 @@ Mode                 LastWriteTime         Length Name
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----        12/23/2025   9:09 AM                Home
-d-----        12/23/2025   9:09 AM                Shared
+d-----        12/23/2025   4:24 PM                Shared
 -a----        12/23/2025   9:09 AM             88 _ViewImports.cshtml
 -a----        12/23/2025   9:09 AM             33 _ViewStart.cshtml
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\Views\Home
@@ -1052,6 +503,7 @@ Mode                 LastWriteTime         Length Name
 -a----        12/23/2025   9:09 AM            882 Error.cshtml
 -a----        12/23/2025   9:09 AM           2211 _Layout.cshtml
 -a----        12/23/2025   9:09 AM            925 _Layout.cshtml.css
+-a----        12/23/2025   4:24 PM            802 _LoginPartial.cshtml
 -a----        12/23/2025   9:09 AM            174 _ValidationScriptsPartial.csh
                                                   tml
     Directory: C:\Users\joe\projects\ad-platform\Ad-platform\Auth\wwwroot
