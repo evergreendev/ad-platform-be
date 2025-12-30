@@ -8,20 +8,13 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UserController(UserManager<ApplicationUser> userManager) : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-
-    public UserController(UserManager<ApplicationUser> userManager)
-    {
-        _userManager = userManager;
-    }
-
     [HttpGet]
     [Authorize(Roles = "admin")]
     public ActionResult<IEnumerable<UserDto>> Get()
     {
-        return Ok(_userManager.Users
+        return Ok(userManager.Users
             .Select(u => new UserDto { Id = u.Id, UserName = u.UserName, Email = u.Email }));
     }
 
@@ -33,7 +26,6 @@ public class UserController : ControllerBase
             Claims = User.Claims.Select(c => new { c.Type, c.Value }),
             Headers = Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString())
         });
-        
     }
 
     [Route("[action]/{id:int}")]

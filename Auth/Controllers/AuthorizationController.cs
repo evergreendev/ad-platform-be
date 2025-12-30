@@ -11,18 +11,11 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Auth.Controllers;
 
-public class AuthorizationController : Controller
+public class AuthorizationController(
+    UserManager<ApplicationUser> userManager,
+    SignInManager<ApplicationUser> signInManager)
+    : Controller
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
-
-    public AuthorizationController(UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-    }
-
     [HttpGet("~/connect/authorize")]
     [HttpPost("~/connect/authorize")]
     [IgnoreAntiforgeryToken]
@@ -45,11 +38,11 @@ public class AuthorizationController : Controller
         }
         
         // Resolve the current user.
-        var user = await _userManager.GetUserAsync(User);
+        var user = await userManager.GetUserAsync(User);
         if (user is null)
         {
             // If the cookie is stale or user was deleted, force re-login.
-            await _signInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
 
             var returnUrl = Request.PathBase + Request.Path + Request.QueryString;
             var loginUrl = Url.Page(
@@ -61,9 +54,9 @@ public class AuthorizationController : Controller
             return Redirect(loginUrl!);
         }
         
-        var principal = await _signInManager.CreateUserPrincipalAsync(user);
+        var principal = await signInManager.CreateUserPrincipalAsync(user);
         
-        principal.SetClaim(Claims.Subject, await _userManager.GetUserIdAsync(user));
+        principal.SetClaim(Claims.Subject, await userManager.GetUserIdAsync(user));
         
         var identifier = principal.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         
@@ -79,7 +72,7 @@ public class AuthorizationController : Controller
 
         if (scopes.Contains(Scopes.Roles))
         {
-                    var roles = await _userManager.GetRolesAsync(user);
+                    var roles = await userManager.GetRolesAsync(user);
                     
                     identity.SetClaims(Claims.Role, roles.ToImmutableArray());
         }
