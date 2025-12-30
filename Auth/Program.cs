@@ -36,7 +36,7 @@ builder.Services.AddOpenIddict()
     .AddCore(options => { options.UseEntityFrameworkCore().UseDbContext<ApplicationDbContext>(); })
     .AddServer(options =>
     {
-        options.SetIssuer(new Uri("https://localhost:7032/"));
+        options.SetIssuer(new Uri(builder.Configuration["OpenIddict:Issuer"]!));
         
         options.SetAuthorizationEndpointUris("/connect/authorize")
             .SetTokenEndpointUris("/connect/token")
