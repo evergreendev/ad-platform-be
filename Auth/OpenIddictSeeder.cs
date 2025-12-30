@@ -5,7 +5,7 @@ namespace Auth;
 
 public class OpenIddictSeeder
 {
-    public static async Task SeedAsync(IServiceProvider services)
+    public static async Task SeedAsync(IServiceProvider services, string clientSecret)
     {
         using var scope = services.CreateScope();
         
@@ -44,7 +44,7 @@ public class OpenIddictSeeder
             var descriptor = new OpenIddictApplicationDescriptor
             {
                 ClientId = clientId,
-                ClientSecret = "dev-secret-change",
+                ClientSecret = clientSecret,
                 DisplayName = "Next App (Dev)",
 
                 ConsentType = OpenIddictConstants.ConsentTypes.Implicit,

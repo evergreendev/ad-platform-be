@@ -27,8 +27,12 @@ builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.Authen
 builder.Services.AddOpenIddict()
     .AddValidation(options =>
     {
-        //todo set this dynamically
-        options.SetIssuer("https://localhost:7032/");
+        var issuer = builder.Configuration["OpenIddict:Issuer"];
+
+        if (!string.IsNullOrEmpty(issuer))
+        {
+            options.SetIssuer(issuer);
+        }
         
         var encryptionKey = builder.Configuration["OpenIddict:EncryptionKey"];
         if (!string.IsNullOrEmpty(encryptionKey))
@@ -42,7 +46,13 @@ builder.Services.AddOpenIddict()
         
 
         options.SetClientId("next-app");
-        options.SetClientSecret("dev-secret-change");
+        
+        var clientSecret = builder.Configuration["OpenIddict:ClientSecret"];
+
+        if (!string.IsNullOrEmpty(clientSecret))
+        {
+            options.SetClientSecret(clientSecret);
+        }
         
         options.UseSystemNetHttp();
         

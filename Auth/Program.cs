@@ -114,9 +114,11 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-if (app.Environment.IsDevelopment())
+var clientSecret = builder.Configuration["OpenIddict:ClientSecret"];
+
+if (app.Environment.IsDevelopment() && !string.IsNullOrEmpty(clientSecret))
 {
-    await OpenIddictSeeder.SeedAsync(app.Services);
+    await OpenIddictSeeder.SeedAsync(app.Services, clientSecret);
 }
 
 app.Run();
