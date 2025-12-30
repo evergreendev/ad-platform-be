@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Collections.Immutable;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Auth.Controllers;
@@ -63,20 +64,47 @@ public class AuthorizationController : Controller
         var principal = await _signInManager.CreateUserPrincipalAsync(user);
         
         principal.SetClaim(Claims.Subject, await _userManager.GetUserIdAsync(user));
-        principal.SetClaim(Claims.Name, user.UserName);
-        principal.SetClaim(Claims.Email, user.Email);
+        
+        var identifier = principal.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        
+        var identity = new ClaimsIdentity(
+            authenticationType: TokenValidationParameters.DefaultAuthenticationType,
+            nameType: Claims.Name,
+            roleType: Claims.Role);
+        
+        var scopes = request.GetScopes();
+        
+        identity.SetScopes(scopes);
+        identity.SetResources("api");
+
+        if (scopes.Contains(Scopes.Roles))
+        {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    
+                    identity.SetClaims(Claims.Role, roles.ToImmutableArray());
+        }
+        
+
+        
+        // Import a few select claims from the identity stored in the local cookie.
+        identity.AddClaim(new Claim(Claims.Subject, identifier));
+        identity.AddClaim(new Claim(Claims.Name, identifier).SetDestinations(Destinations.AccessToken));
+        identity.AddClaim(new Claim(Claims.PreferredUsername, identifier).SetDestinations(Destinations.AccessToken));
+        
+        identity.SetClaim(Claims.Name, user.UserName);
+        identity.SetClaim(Claims.Email, user.Email);
         
         // Apply requested scopes (you can also restrict these if you want).
-        principal.SetScopes(request.GetScopes());
-        principal.SetResources("api");
+        identity.SetScopes(request.GetScopes());
+        identity.SetResources("api");
         
         // Decide which claims go into which tokens.
-        foreach (var claim in principal.Claims)
+        foreach (var claim in identity.Claims)
         {
             claim.SetDestinations(GetDestinations(claim));
         }
 
-        return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
     
     // Token endpoint: exchanges auth code for tokens, and refreshes tokens.
@@ -111,17 +139,12 @@ public class AuthorizationController : Controller
 
         return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
-
-    [HttpPost("~/connect/introspect")]
-    [IgnoreAntiforgeryToken]
-    [Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
-    public IActionResult Introspect() => Ok();
     
     private static IEnumerable<string> GetDestinations(Claim claim)
     {
         return claim.Type switch
         {
-            Claims.Name or Claims.Email =>
+            Claims.Name or Claims.Email or Claims.Role =>
                 new[] { Destinations.AccessToken, Destinations.IdentityToken },
 
             _ => new[] { Destinations.AccessToken }

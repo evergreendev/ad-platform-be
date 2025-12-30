@@ -2,6 +2,7 @@ using Auth;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,16 +47,28 @@ builder.Services.AddOpenIddict()
         options.RequireProofKeyForCodeExchange();
 
         options.AllowRefreshTokenFlow();
+                // Register the encryption credentials. This sample uses a symmetric
+        // encryption key that is shared between the server and the API project.
+        var encryptionKey = builder.Configuration["OpenIddict:EncryptionKey"];
+        if (!string.IsNullOrEmpty(encryptionKey))
+        {
+            options.AddEncryptionKey(new SymmetricSecurityKey(
+                Convert.FromBase64String(encryptionKey)));
+        }
+        
+        if (builder.Environment.IsDevelopment())
+        {
+            options.AddDevelopmentSigningCertificate();
+            options.AddDevelopmentEncryptionCertificate(); // Usually paired together
+        }
 
         options.RegisterScopes(
             OpenIddictConstants.Scopes.OpenId,
             OpenIddictConstants.Scopes.Profile,
             OpenIddictConstants.Scopes.Email,
+            OpenIddictConstants.Scopes.Roles,
             "api"
         );
-
-        options.AddDevelopmentEncryptionCertificate()
-            .AddDevelopmentSigningCertificate();
 
         options.UseAspNetCore()
             .EnableAuthorizationEndpointPassthrough()

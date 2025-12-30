@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Ad_platform.Data;
-using Microsoft.AspNetCore.Authorization;
+using API.Data;
+using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Validation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,20 +18,32 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddIdentityCore<Auth.ApplicationUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
 
 builder.Services.AddOpenIddict()
     .AddValidation(options =>
-    { 
+    {
         //todo set this dynamically
         options.SetIssuer("https://localhost:7032/");
         
+        var encryptionKey = builder.Configuration["OpenIddict:EncryptionKey"];
+        if (!string.IsNullOrEmpty(encryptionKey))
+        {
+            options.AddEncryptionKey(new SymmetricSecurityKey(
+                Convert.FromBase64String(encryptionKey)));
+        }
+        
         options.AddAudiences("api");
+        options.AddAudiences("next-app");
+        
 
         options.SetClientId("next-app");
         options.SetClientSecret("dev-secret-change");
-
-        options.UseIntrospection();
+        
         options.UseSystemNetHttp();
         
         options.UseAspNetCore();
@@ -60,13 +72,6 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-// Example protected endpoint
-app.MapGet("/whoami", (System.Security.Claims.ClaimsPrincipal user) =>
-    {
-        return user.Claims.Select(c => new { c.Type, c.Value });
-    })
-    .RequireAuthorization();
 
 app.MapControllers();
 app.MapControllerRoute(

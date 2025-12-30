@@ -12,6 +12,17 @@ public class OpenIddictSeeder
         var scopeManager = scope.ServiceProvider.GetRequiredService<IOpenIddictScopeManager>();
         var appManager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+        foreach (var role in new[] { "admin", "user" })
+        {
+            if (await roleManager.FindByNameAsync(role) is null)
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
+        
+        
 
         if (await scopeManager.FindByNameAsync("api") is null)
         {
@@ -59,7 +70,8 @@ public class OpenIddictSeeder
                     OpenIddictConstants.Scopes.OpenId,
                     OpenIddictConstants.Permissions.Scopes.Profile,
                     OpenIddictConstants.Permissions.Scopes.Email,
-                    OpenIddictConstants.Permissions.Prefixes.Scope + "api"
+                    OpenIddictConstants.Permissions.Prefixes.Scope + "api",
+                    OpenIddictConstants.Permissions.Scopes.Roles
                 },
 
                 Requirements =
@@ -90,6 +102,8 @@ public class OpenIddictSeeder
                 var errors = string.Join("; ", result.Errors.Select(e => $"{e.Code}:{e.Description}"));
                 throw new InvalidOperationException("Failed to create dev user: " + errors);
             }
+
+            await userManager.AddToRoleAsync(user, "admin");
         }
 
     }
