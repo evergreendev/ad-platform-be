@@ -43,10 +43,11 @@ public class UserController(
 
         // Generate the password reset token
         var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        var encodedToken = Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(System.Text.Encoding.UTF8.GetBytes(token));
         
         // Note: The Auth project's URL is where the Identity UI lives
         var authBaseUrl = configuration["OpenIddict:Issuer"]?.TrimEnd('/'); 
-        var callbackUrl = $"{authBaseUrl}/Identity/Account/ResetPassword?code={HttpUtility.UrlEncode(token)}&email={HttpUtility.UrlEncode(user.Email)}";
+        var callbackUrl = $"{authBaseUrl}/Identity/Account/ResetPassword?code={encodedToken}&email={HttpUtility.UrlEncode(user.Email)}";
 
         /*TODO fix the password reset link. right now it's sending up invalid token for no reason*/
         await emailSender.SendPasswordResetLinkAsync(user, user.Email!, callbackUrl);

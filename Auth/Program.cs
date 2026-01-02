@@ -1,4 +1,5 @@
 using Auth;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseOpenIddict();
     }
 );
+
+builder.Services.AddDataProtection()
+    .SetApplicationName("Ad-platform")
+    .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, "..", "shared-keys")));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
