@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using API.Models;
+using API.DTOs;
 using Auth;
 using Auth.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +17,10 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Roles = "admin")]
-    public ActionResult<IEnumerable<UserDto>> Get()
+    public ActionResult<IEnumerable<ReadUserDTO>> Get()
     {
         return Ok(userManager.Users
-            .Select(u => new UserDto { Id = u.Id, UserName = u.UserName, Email = u.Email }));
+            .Select(u => new ReadUserDTO { Id = u.Id, UserName = u.UserName, Email = u.Email }));
     }
 
     [HttpPost]

@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default") ??
                        throw new InvalidOperationException("Connection string 'Default' not found.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AuthDbContext>(options =>
     {
         options.UseNpgsql(connectionString);
         options.UseOpenIddict();
@@ -28,7 +28,7 @@ builder.Services.AddRazorPages();
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddEntityFrameworkStores<AuthDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
 
@@ -38,7 +38,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddOpenIddict()
-    .AddCore(options => { options.UseEntityFrameworkCore().UseDbContext<ApplicationDbContext>(); })
+    .AddCore(options => { options.UseEntityFrameworkCore().UseDbContext<AuthDbContext>(); })
     .AddServer(options =>
     {
         options.SetIssuer(new Uri(builder.Configuration["OpenIddict:Issuer"]!));

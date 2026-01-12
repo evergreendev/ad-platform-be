@@ -1,6 +1,6 @@
-﻿namespace API.Models;
+﻿namespace API.DTOs;
 
-public class UserDto
+public class ReadUserDTO
 {
     public required string Id { get; set; }
     public string? UserName { get; set; }
