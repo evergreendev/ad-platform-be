@@ -36,11 +36,6 @@ namespace API.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<string>("AssociatedCompany")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
                     b.Property<string>("City")
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
@@ -78,15 +73,7 @@ namespace API.Data.Migrations
                     b.Property<decimal?>("Latitude")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("LegacyBillingContact")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
                     b.Property<string>("LegacyPrimaryCategory")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<string>("LegacyPrimaryContact")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 

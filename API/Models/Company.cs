@@ -25,17 +25,14 @@ public class Company
     public bool Collections { get; set; }
     public bool WriteOff { get; set; }
     public string? PrimaryRepName { get; set; }
-    public string? AssociatedCompany { get; set; }
     /* todo(domain): FK to billing contact once contacts are mapped
      * 
      * public string? BillingContactId { get; set; }
      */
-    public string? LegacyBillingContact { get; set; }
     /* todo(domain): FK to primary contact once contacts are mapped
      * 
      * public string? PrimaryContactId { get; set; }
      */
-    public string? LegacyPrimaryContact { get; set; }
     /* todo(domain): FK to print artwork contact once contacts are mapped
      
      * public string? PrintArtworkContactId { get; set; }

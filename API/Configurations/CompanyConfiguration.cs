@@ -15,10 +15,6 @@ public class CompanyConfiguration: IEntityTypeConfiguration<Company>
         builder.Property(x => x.CompanyName)
             .IsRequired()
             .HasMaxLength(200);
-        
-        builder.Property(x => x.AssociatedCompany)
-            .IsRequired()
-            .HasMaxLength(200);
 
         builder.Property(x => x.WebsiteUrl).HasMaxLength(500);
         
@@ -39,8 +35,6 @@ public class CompanyConfiguration: IEntityTypeConfiguration<Company>
         builder.Property(x => x.TaxId).HasMaxLength(64);
 
         builder.Property(x => x.PrimaryRepName).HasMaxLength(200);
-        builder.Property(x => x.LegacyBillingContact).HasMaxLength(200);
-        builder.Property(x => x.LegacyPrimaryContact).HasMaxLength(200);
         builder.Property(x => x.LegacyPrimaryCategory).HasMaxLength(200);
     }
 }
