@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Abstractions;
+using OpenIddict.Validation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,12 @@ builder.Services
     .AddEntityFrameworkStores<AuthDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -83,7 +90,11 @@ builder.Services.AddOpenIddict()
     {
         options.UseAspNetCore();
         options.UseLocalServer();
+        options.AddAudiences("api");
+        options.AddAudiences("next-app");
     });
+
+builder.Services.AddTransient<IEmailSender<ApplicationUser>, Auth.Services.EmailSender>();
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {

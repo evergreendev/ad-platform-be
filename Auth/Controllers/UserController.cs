@@ -1,12 +1,10 @@
 ﻿using System.Web;
-using API.DTOs;
-using Auth;
 using Auth.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
+namespace Auth.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -17,10 +15,10 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Roles = "admin")]
-    public ActionResult<IEnumerable<ReadUserDTO>> Get()
+    public ActionResult<IEnumerable<ReadUserDto>> Get()
     {
         return Ok(userManager.Users
-            .Select(u => new ReadUserDTO { Id = u.Id, UserName = u.UserName, Email = u.Email }));
+            .Select(u => new ReadUserDto { Id = u.Id, UserName = u.UserName, Email = u.Email }));
     }
 
     [HttpPost]

@@ -1,6 +1,6 @@
-﻿namespace API.DTOs;
+﻿namespace Auth.Models;
 
-public class ReadUserDTO
+public class ReadUserDto
 {
     public required string Id { get; set; }
     public string? UserName { get; set; }

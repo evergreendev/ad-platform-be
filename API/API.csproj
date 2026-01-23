@@ -97,7 +97,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Auth\Auth.csproj" />
+      <Folder Include="Controllers\" />
     </ItemGroup>
-
 </Project>
