@@ -3,11 +3,13 @@ using Auth.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OpenIddict.Validation.AspNetCore;
 
 namespace Auth.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme, Roles = "admin")]
 public class UserController(
     UserManager<ApplicationUser> userManager,
     IEmailSender<ApplicationUser> emailSender,
@@ -17,12 +19,13 @@ public class UserController(
     [Authorize(Roles = "admin")]
     public ActionResult<IEnumerable<ReadUserDto>> Get()
     {
-        return Ok(userManager.Users
-            .Select(u => new ReadUserDto { Id = u.Id, UserName = u.UserName, Email = u.Email }));
+        var users = userManager.Users
+            .Select(u => new ReadUserDto { Id = u.Id, UserName = u.UserName, Email = u.Email })
+            .ToList();
+        return Ok(users);
     }
 
     [HttpPost]
-    [Authorize(Roles = "admin")]
     public async Task<ActionResult<UserRegistrationResponseDto>> Post([FromBody] UserRegistrationDto model)
     {
         var user = new ApplicationUser
@@ -59,7 +62,7 @@ public class UserController(
     }
 
     [HttpGet("whoami")]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     public IActionResult WhoAmI()
     {
         return Ok(new {
@@ -70,7 +73,6 @@ public class UserController(
 
     [Route("[action]/{id:int}")]
     [HttpPost]
-    [Authorize(Roles = "admin")]
     public ActionResult<string> GetByIds(int id)
     {
         return Ok("hello" + id);

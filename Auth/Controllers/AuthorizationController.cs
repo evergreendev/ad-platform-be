@@ -28,13 +28,12 @@ public class AuthorizationController(
         {
             var returnUrl = Request.PathBase + Request.Path + Request.QueryString;
 
-            var loginUrl = Url.Page(
-                pageName: "/Account/Login",
-                pageHandler: null,
-                values: new { area = "Identity", returnUrl },
-                protocol: Request.Scheme);
-            
-            return Redirect(loginUrl!);
+            return Challenge(
+                authenticationSchemes: IdentityConstants.ApplicationScheme,
+                properties: new AuthenticationProperties
+                {
+                    RedirectUri = returnUrl
+                });
         }
         
         // Resolve the current user.
@@ -45,13 +44,13 @@ public class AuthorizationController(
             await signInManager.SignOutAsync();
 
             var returnUrl = Request.PathBase + Request.Path + Request.QueryString;
-            var loginUrl = Url.Page(
-                "/Account/Login",
-                pageHandler: null,
-                values: new { area = "Identity", returnUrl },
-                protocol: Request.Scheme);
 
-            return Redirect(loginUrl!);
+            return Challenge(
+                authenticationSchemes: IdentityConstants.ApplicationScheme,
+                properties: new AuthenticationProperties
+                {
+                    RedirectUri = returnUrl
+                });
         }
         
         var principal = await signInManager.CreateUserPrincipalAsync(user);

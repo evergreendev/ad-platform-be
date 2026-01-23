@@ -36,7 +36,7 @@ public class OpenIddictSeeder
         }
 
         var clientId = "next-app";
-        var redirectUri = new Uri("http://localhost:3000/api/auth/callback/openiddict");
+        var redirectUri = new Uri("https://localhost:3000/api/auth/callback/openiddict");
         var postLogoutRedirectUri = new Uri("https://localhost:3000");
 
         if (await appManager.FindByClientIdAsync(clientId) is null)
