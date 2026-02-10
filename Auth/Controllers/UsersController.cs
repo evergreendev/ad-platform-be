@@ -10,7 +10,7 @@ namespace Auth.Controllers;
 [ApiController]
 [Route("[controller]")]
 [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme, Roles = "admin")]
-public class UserController(
+public class UsersController(
     UserManager<ApplicationUser> userManager,
     IEmailSender<ApplicationUser> emailSender,
     IConfiguration configuration) : ControllerBase
@@ -49,8 +49,7 @@ public class UserController(
         // Note: The Auth project's URL is where the Identity UI lives
         var authBaseUrl = configuration["OpenIddict:Issuer"]?.TrimEnd('/'); 
         var callbackUrl = $"{authBaseUrl}/Identity/Account/ResetPassword?code={encodedToken}&email={HttpUtility.UrlEncode(user.Email)}";
-
-        /*TODO fix the password reset link. right now it's sending up invalid token for no reason*/
+        
         await emailSender.SendPasswordResetLinkAsync(user, user.Email!, callbackUrl);
 
         return Ok(new UserRegistrationResponseDto
