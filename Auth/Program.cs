@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Auth;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -72,7 +73,13 @@ builder.Services.AddOpenIddict()
         if (builder.Environment.IsDevelopment())
         {
             options.AddDevelopmentSigningCertificate();
-            options.AddDevelopmentEncryptionCertificate(); // Usually paired together
+            options.AddDevelopmentEncryptionCertificate();
+        }
+        else
+        {
+            string certPath = Path.Combine(builder.Environment.ContentRootPath, "signing-certificate.pfx");
+            string certPassword = builder.Configuration["CertificatePassword"] ?? string.Empty;
+            options.AddSigningCertificate(new X509Certificate2(certPath, certPassword));
         }
 
         options.RegisterScopes(
