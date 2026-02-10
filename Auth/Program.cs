@@ -77,8 +77,11 @@ builder.Services.AddOpenIddict()
         }
         else
         {
-            string certPath = Path.Combine(builder.Environment.ContentRootPath, "signing-certificate.pfx");
+            string certPath = builder.Configuration["CertificatePath"] 
+                              ?? Path.Combine(builder.Environment.ContentRootPath, "signing-certificate.pfx");
+    
             string certPassword = builder.Configuration["CertificatePassword"] ?? string.Empty;
+    
             options.AddSigningCertificate(new X509Certificate2(certPath, certPassword));
         }
 
