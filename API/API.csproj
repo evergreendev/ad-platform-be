@@ -95,8 +95,4 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
 </Project>

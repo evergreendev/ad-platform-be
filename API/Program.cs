@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using API.Data;
+using API.Services;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Validation.AspNetCore;
@@ -62,6 +63,8 @@ builder.Services.AddOpenIddict()
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ICompanySearchService, DbCompanySearchService>();
 
 var app = builder.Build();
 
