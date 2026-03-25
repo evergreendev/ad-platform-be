@@ -1,0 +1,19 @@
+﻿namespace API.Models;
+
+public class CompanyContact
+{
+    public Guid Id { get; set; }
+    
+    public Guid CompanyId { get; set; }
+    public Company Company { get; set; } = null!;
+    
+    public Guid ContactId { get; set; }
+    public Contact Contact { get; set; } = null!;
+    
+    public bool IsPrimary { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+    public string? Notes { get; set; }
+    public ICollection<CompanyContactRole> Roles { get; set; } = new List<CompanyContactRole>();
+    public ICollection<CompanyContactEmail> Emails { get; set; } = new List<CompanyContactEmail>();
+}

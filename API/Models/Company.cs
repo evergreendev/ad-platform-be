@@ -46,4 +46,6 @@ public class Company
     public bool Dead { get; set; }
     public bool IsNewCompany { get; set; }
     public bool? CompanySpecialBilling { get; set; }
+    
+    public ICollection<CompanyContact> CompanyContacts { get; set; } = new List<CompanyContact>();
 }
