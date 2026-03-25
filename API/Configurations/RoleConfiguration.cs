@@ -22,5 +22,12 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(x => x.Name).IsUnique();
+
+        builder.HasData(
+            new Role{Id = 1, Name = "Billing", IsSystem = true},
+            new Role{Id = 2, Name = "Print Artwork", IsSystem = true},
+            new Role{Id = 3, Name = "Digital Artwork", IsSystem = true},
+            new Role{Id = 4, Name = "Marketing", IsSystem = true}
+                );
     }
 }
