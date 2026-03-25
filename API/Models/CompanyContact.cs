@@ -16,4 +16,5 @@ public class CompanyContact
     public string? Notes { get; set; }
     public ICollection<CompanyContactRole> Roles { get; set; } = new List<CompanyContactRole>();
     public ICollection<CompanyContactEmail> Emails { get; set; } = new List<CompanyContactEmail>();
+    public ICollection<CompanyContactPhone> Phones { get; set; } = new List<CompanyContactPhone>();
 }

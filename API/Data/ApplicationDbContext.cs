@@ -10,15 +10,25 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Company> Companies => Set<Company>();
     
     public DbSet<Contact> Contacts => Set<Contact>();
-    
+    public DbSet<CompanyContact> CompanyContacts => Set<CompanyContact>();
+    public DbSet<CompanyContactEmail> CompanyContactEmails => Set<CompanyContactEmail>();
+    public DbSet<CompanyContactPhone> CompanyContactPhones => Set<CompanyContactPhone>();
+    public DbSet<CompanyContactRole> CompanyContactRoles => Set<CompanyContactRole>();
+    public DbSet<ContactEmail> ContactEmails => Set<ContactEmail>();
+    public DbSet<Role> Roles => Set<Role>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new ExternalIdMapConfiguration());
-        
         builder.ApplyConfiguration(new CompanyConfiguration());
-        
         builder.ApplyConfiguration(new ContactConfiguration());
-        
+        builder.ApplyConfiguration(new ContactEmailConfiguration());
+        builder.ApplyConfiguration(new CompanyContactConfiguration());
+        builder.ApplyConfiguration(new CompanyContactEmailConfiguration());
+        builder.ApplyConfiguration(new CompanyContactPhoneConfiguration());
+        builder.ApplyConfiguration(new CompanyContactRoleConfiguration());
+        builder.ApplyConfiguration(new RoleConfiguration());
+
         base.OnModelCreating(builder);
     }
 }
