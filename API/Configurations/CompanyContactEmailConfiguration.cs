@@ -30,6 +30,6 @@ public class CompanyContactEmailConfiguration : IEntityTypeConfiguration<Company
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(x => x.CompanyContactId);
-        builder.HasIndex(x => x.Email);
+        builder.HasIndex(x => new { x.Email, x.CompanyContactId }).IsUnique();
     }
 }

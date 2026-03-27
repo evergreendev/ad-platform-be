@@ -224,8 +224,9 @@ namespace API.Data.Migrations
                     b.HasIndex("CompanyContactId")
                         .HasDatabaseName("ix_company_contact_email_company_contact_id");
 
-                    b.HasIndex("Email")
-                        .HasDatabaseName("ix_company_contact_email_email");
+                    b.HasIndex("Email", "CompanyContactId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_company_contact_email_email_company_contact_id");
 
                     b.ToTable("company_contact_email", (string)null);
                 });
@@ -265,8 +266,9 @@ namespace API.Data.Migrations
                     b.HasIndex("CompanyContactId")
                         .HasDatabaseName("ix_company_contact_phone_company_contact_id");
 
-                    b.HasIndex("Phone")
-                        .HasDatabaseName("ix_company_contact_phone_phone");
+                    b.HasIndex("Phone", "CompanyContactId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_company_contact_phone_phone_company_contact_id");
 
                     b.ToTable("company_contact_phone", (string)null);
                 });

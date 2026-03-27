@@ -30,6 +30,6 @@ public class CompanyContactPhoneConfiguration : IEntityTypeConfiguration<Company
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(x => x.CompanyContactId);
-        builder.HasIndex(x => x.Phone);
+        builder.HasIndex(x => new { x.Phone, x.CompanyContactId }).IsUnique();
     }
 }
