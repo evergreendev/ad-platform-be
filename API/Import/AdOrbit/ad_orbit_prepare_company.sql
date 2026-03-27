@@ -1,0 +1,43 @@
+﻿create table staging.dim_company_prepped
+(
+    company_id                 integer,
+    legacy_sid                 integer,
+    root_company_id            integer,
+    channel_id                 integer,
+    instance_key               text,
+    company_name               text,
+    address                    text,
+    address2                   text,
+    city                       text,
+    state                      text,
+    zip                        text,
+    country                    text,
+    website_url                text,
+    category                   text,
+    company_type               text,
+    primary_category           text,
+    primary_rep_name           text,
+    currency_id                integer,
+    tax_id                     text,
+    company_xref               text,
+    hubspot_company_id         bigint,
+    billing_contact_id         integer,
+    primary_contact_id         integer,
+    print_artwork_contact_id   integer,
+    digital_artwork_contact_id integer,
+    latitude                   numeric(9, 6),
+    longitude                  numeric(9, 6),
+    created_date               timestamp,
+    last_update                timestamp,
+    instance_live_date         timestamp,
+    instance_link              text,
+    instance_users             integer,
+    collections                boolean,
+    write_off                  boolean,
+    dead                       boolean,
+    is_new_company             boolean,
+    company_special_billing    boolean
+);
+
+alter table staging.dim_company_prepped
+    owner to postgres;
