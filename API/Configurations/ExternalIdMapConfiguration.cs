@@ -39,7 +39,8 @@ public class ExternalIdMapConfiguration : IEntityTypeConfiguration<ExternalIdMap
             {
                 x.SourceSystem,
                 x.SourceTable,
-                x.SourceId
+                x.SourceId,
+                x.EntityType
             })
             .IsUnique();
     }
