@@ -16,7 +16,7 @@ var connectionString = builder.Configuration.GetConnectionString("Default") ??
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     {
-        options.UseNpgsql(connectionString);
+        options.UseNpgsql(connectionString, x => x.MigrationsHistoryTable("__EFMigrationsHistory_Auth", "public"));
         options.UseOpenIddict();
     }
 );

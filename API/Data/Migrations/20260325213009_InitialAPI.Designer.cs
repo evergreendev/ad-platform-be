@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260325160855_add_system_roles")]
-    partial class add_system_roles
+    [Migration("20260325213009_InitialAPI")]
+    partial class InitialAPI
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,88 +29,112 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Address")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("address");
 
                     b.Property<string>("Address2")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("address2");
 
                     b.Property<string>("City")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("city");
 
                     b.Property<bool>("Collections")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("collections");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("company_name");
 
                     b.Property<bool?>("CompanySpecialBilling")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("company_special_billing");
 
                     b.Property<string>("Country")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("country");
 
                     b.Property<DateTimeOffset?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
 
                     b.Property<bool>("Dead")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("dead");
 
                     b.Property<long?>("HubspotCompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("hubspot_company_id");
 
                     b.Property<bool>("IsNewCompany")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_new_company");
 
                     b.Property<DateTimeOffset?>("LastUpdate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update");
 
                     b.Property<decimal?>("Latitude")
-                        .HasColumnType("numeric");
+                        .HasColumnType("numeric")
+                        .HasColumnName("latitude");
 
                     b.Property<string>("LegacyPrimaryCategory")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("legacy_primary_category");
 
                     b.Property<decimal?>("Longitude")
-                        .HasColumnType("numeric");
+                        .HasColumnType("numeric")
+                        .HasColumnName("longitude");
 
                     b.Property<string>("PrimaryRepName")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("primary_rep_name");
 
                     b.Property<string>("State")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("state");
 
                     b.Property<string>("TaxId")
                         .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("tax_id");
 
                     b.Property<string>("Type")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("type");
 
                     b.Property<string>("WebsiteUrl")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("website_url");
 
                     b.Property<bool>("WriteOff")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("write_off");
 
                     b.Property<string>("Zip")
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("zip");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_company");
 
                     b.ToTable("company", (string)null);
                 });
@@ -119,39 +143,51 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("CompanyId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("company_id");
 
                     b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp")
+                        .HasColumnName("end_date");
 
                     b.Property<bool>("IsPrimary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_primary");
 
                     b.Property<string>("Notes")
                         .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("notes");
 
                     b.Property<DateTime?>("StartDate")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp")
+                        .HasColumnName("start_date");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_company_contact");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("CompanyId")
+                        .HasDatabaseName("ix_company_contact_company_id");
 
-                    b.HasIndex("ContactId");
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_company_contact_contact_id");
 
                     b.HasIndex("CompanyId", "ContactId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_company_contact_company_id_contact_id");
 
-                    b.HasIndex("CompanyId", "IsPrimary");
+                    b.HasIndex("CompanyId", "IsPrimary")
+                        .HasDatabaseName("ix_company_contact_company_id_is_primary");
 
                     b.ToTable("company_contact", (string)null);
                 });
@@ -160,31 +196,39 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("CompanyContactId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("company_contact_id");
 
                     b.Property<bool>("DoNotEmail")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("do_not_email");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("email");
 
                     b.Property<bool>("IsPrimary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_primary");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_company_contact_email");
 
-                    b.HasIndex("CompanyContactId");
+                    b.HasIndex("CompanyContactId")
+                        .HasDatabaseName("ix_company_contact_email_company_contact_id");
 
-                    b.HasIndex("Email");
+                    b.HasIndex("Email")
+                        .HasDatabaseName("ix_company_contact_email_email");
 
                     b.ToTable("company_contact_email", (string)null);
                 });
@@ -193,31 +237,39 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("CompanyContactId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("company_contact_id");
 
                     b.Property<bool>("DoNotCall")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("do_not_call");
 
                     b.Property<bool>("IsPrimary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_primary");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("phone");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_company_contact_phone");
 
-                    b.HasIndex("CompanyContactId");
+                    b.HasIndex("CompanyContactId")
+                        .HasDatabaseName("ix_company_contact_phone_company_contact_id");
 
-                    b.HasIndex("Phone");
+                    b.HasIndex("Phone")
+                        .HasDatabaseName("ix_company_contact_phone_phone");
 
                     b.ToTable("company_contact_phone", (string)null);
                 });
@@ -225,14 +277,18 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Models.CompanyContactRole", b =>
                 {
                     b.Property<Guid>("CompanyContactId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("company_contact_id");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
 
-                    b.HasKey("CompanyContactId", "RoleId");
+                    b.HasKey("CompanyContactId", "RoleId")
+                        .HasName("pk_company_contact_role");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_company_contact_role_role_id");
 
                     b.ToTable("company_contact_role", (string)null);
                 });
@@ -241,98 +297,126 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("AddressLine1")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("address_line1");
 
                     b.Property<string>("AddressLine2")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("address_line2");
 
                     b.Property<string>("City")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("city");
 
                     b.Property<string>("Country")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("country");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp")
+                        .HasColumnName("created_date");
 
                     b.Property<string>("Department")
                         .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("department");
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("first_name");
 
                     b.Property<string>("Gender")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("gender");
 
                     b.Property<string>("HubspotId")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("hubspot_id");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(true);
+                        .HasDefaultValue(true)
+                        .HasColumnName("is_active");
 
                     b.Property<string>("JobTitle")
                         .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("job_title");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("last_name");
 
                     b.Property<DateTime?>("LastUpdatedDate")
-                        .HasColumnType("timestamp");
+                        .HasColumnType("timestamp")
+                        .HasColumnName("last_updated_date");
 
                     b.Property<string>("LeadSource")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("lead_source");
 
                     b.Property<string>("LeadStatus")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("lead_status");
 
                     b.Property<string>("Salutation")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("salutation");
 
                     b.Property<string>("State")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("state");
 
                     b.Property<string>("UserRepId")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("user_rep_id");
 
                     b.Property<string>("Zip")
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("zip");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_contact");
 
-                    b.HasIndex("FirstName");
+                    b.HasIndex("FirstName")
+                        .HasDatabaseName("ix_contact_first_name");
 
-                    b.HasIndex("HubspotId");
+                    b.HasIndex("HubspotId")
+                        .HasDatabaseName("ix_contact_hubspot_id");
 
-                    b.HasIndex("IsActive");
+                    b.HasIndex("IsActive")
+                        .HasDatabaseName("ix_contact_is_active");
 
-                    b.HasIndex("LastName");
+                    b.HasIndex("LastName")
+                        .HasDatabaseName("ix_contact_last_name");
 
-                    b.HasIndex("UserRepId");
+                    b.HasIndex("UserRepId")
+                        .HasDatabaseName("ix_contact_user_rep_id");
 
-                    b.HasIndex("FirstName", "LastName");
+                    b.HasIndex("FirstName", "LastName")
+                        .HasDatabaseName("ix_contact_first_name_last_name");
 
-                    b.HasIndex("LastName", "FirstName", "City");
+                    b.HasIndex("LastName", "FirstName", "City")
+                        .HasDatabaseName("ix_contact_last_name_first_name_city");
 
                     b.ToTable("contact", (string)null);
                 });
@@ -341,31 +425,39 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
 
                     b.Property<bool>("DoNotEmail")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("do_not_email");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("email");
 
                     b.Property<bool>("IsPrimary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_primary");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_contact_email");
 
-                    b.HasIndex("ContactId");
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_contact_email_contact_id");
 
-                    b.HasIndex("Email");
+                    b.HasIndex("Email")
+                        .HasDatabaseName("ix_contact_email_email");
 
                     b.ToTable("contact_email", (string)null);
                 });
@@ -374,38 +466,47 @@ namespace API.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("EntityType")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("entity_type");
 
                     b.Property<Guid>("InternalId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("internal_id");
 
                     b.Property<string>("SourceId")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("source_id");
 
                     b.Property<string>("SourceSystem")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("source_system");
 
                     b.Property<string>("SourceTable")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("source_table");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_external_id_map");
 
                     b.HasIndex("SourceSystem", "SourceTable", "SourceId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_external_id_map_source_system_source_table_source_id");
 
                     b.ToTable("external_id_map", (string)null);
                 });
@@ -414,22 +515,27 @@ namespace API.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_system");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_role");
 
                     b.HasIndex("Name")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_role_name");
 
                     b.ToTable("role", (string)null);
 
@@ -466,13 +572,15 @@ namespace API.Data.Migrations
                         .WithMany("CompanyContacts")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_company_contact_company_company_id");
 
                     b.HasOne("API.Models.Contact", "Contact")
                         .WithMany("CompanyContacts")
                         .HasForeignKey("ContactId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_company_contact_contact_contact_id");
 
                     b.Navigation("Company");
 
@@ -485,7 +593,8 @@ namespace API.Data.Migrations
                         .WithMany("Emails")
                         .HasForeignKey("CompanyContactId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_company_contact_email_company_contact_company_contact_id");
 
                     b.Navigation("CompanyContact");
                 });
@@ -496,7 +605,8 @@ namespace API.Data.Migrations
                         .WithMany("Phones")
                         .HasForeignKey("CompanyContactId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_company_contact_phone_company_contact_company_contact_id");
 
                     b.Navigation("CompanyContact");
                 });
@@ -507,13 +617,15 @@ namespace API.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("CompanyContactId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_company_contact_role_company_contact_company_contact_id");
 
                     b.HasOne("API.Models.Role", "Role")
                         .WithMany("CompanyContactRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_company_contact_role_roles_role_id");
 
                     b.Navigation("CompanyContact");
 
@@ -526,7 +638,8 @@ namespace API.Data.Migrations
                         .WithMany("Emails")
                         .HasForeignKey("ContactId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_contact_email_contact_contact_id");
 
                     b.Navigation("Contact");
                 });
