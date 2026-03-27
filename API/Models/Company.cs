@@ -25,25 +25,12 @@ public class Company
     public bool Collections { get; set; }
     public bool WriteOff { get; set; }
     public string? PrimaryRepName { get; set; }
-    /* todo(domain): FK to billing contact once contacts are mapped
-     * 
-     * public string? BillingContactId { get; set; }
-     */
-    /* todo(domain): FK to primary contact once contacts are mapped
-     * 
-     * public string? PrimaryContactId { get; set; }
-     */
-    /* todo(domain): FK to print artwork contact once contacts are mapped
-     
-     * public string? PrintArtworkContactId { get; set; }
-    public string? DigitalArtworkContactId { get; set; }*/
-    /*todo(domain): FK to primary category once categories mapped*/
     public string? LegacyPrimaryCategory { get; set; }
     public long? HubspotCompanyId { get; set; }
     public decimal? Latitude { get; set; }
     public decimal? Longitude { get; set; }
     public DateTimeOffset? CreatedDate { get; set; }
-    public bool Dead { get; set; }
+    public bool IsActive { get; set; }
     public bool IsNewCompany { get; set; }
     public bool? CompanySpecialBilling { get; set; }
     

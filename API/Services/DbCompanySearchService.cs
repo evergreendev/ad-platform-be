@@ -56,7 +56,7 @@ public class DbCompanySearchService(ApplicationDbContext context) : ICompanySear
             dbQuery = dbQuery.Where(c => c.WriteOff == query.WriteOff.Value);
 
         if (query.Dead.HasValue)
-            dbQuery = dbQuery.Where(c => c.Dead == query.Dead.Value);
+            dbQuery = dbQuery.Where(c => c.IsActive == query.Dead.Value);
 
         if (query.IsNewCompany.HasValue)
             dbQuery = dbQuery.Where(c => c.IsNewCompany == query.IsNewCompany.Value);
