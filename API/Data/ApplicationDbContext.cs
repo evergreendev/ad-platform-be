@@ -16,6 +16,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<CompanyContactRole> CompanyContactRoles => Set<CompanyContactRole>();
     public DbSet<ContactEmail> ContactEmails => Set<ContactEmail>();
     public DbSet<Role> Roles => Set<Role>();
+    public DbSet<IntegrationConnection> IntegrationConnections => Set<IntegrationConnection>();
+    public DbSet<ExternalRecordLink> ExternalRecordLinks => Set<ExternalRecordLink>();
+    public DbSet<IntegrationSyncLog> IntegrationSyncLogs => Set<IntegrationSyncLog>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,6 +31,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.ApplyConfiguration(new CompanyContactPhoneConfiguration());
         builder.ApplyConfiguration(new CompanyContactRoleConfiguration());
         builder.ApplyConfiguration(new RoleConfiguration());
+        builder.ApplyConfiguration(new IntegrationConnectionConfiguration());
+        builder.ApplyConfiguration(new ExternalRecordLinkConfiguration());
+        builder.ApplyConfiguration(new IntegrationSyncLogConfiguration());
 
         base.OnModelCreating(builder);
     }

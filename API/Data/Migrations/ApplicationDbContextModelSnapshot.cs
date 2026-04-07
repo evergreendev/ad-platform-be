@@ -510,6 +510,194 @@ namespace API.Data.Migrations
                     b.ToTable("external_id_map", (string)null);
                 });
 
+            modelBuilder.Entity("API.Models.ExternalRecordLink", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("ExternalEntityType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("external_entity_type");
+
+                    b.Property<string>("ExternalId")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("external_id");
+
+                    b.Property<Guid>("IntegrationConnectionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("integration_connection_id");
+
+                    b.Property<Guid>("InternalEntityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("internal_entity_id");
+
+                    b.Property<string>("InternalEntityType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("internal_entity_type");
+
+                    b.Property<string>("LastSyncError")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)")
+                        .HasColumnName("last_sync_error");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_synced_at");
+
+                    b.Property<string>("ProviderMetadataJson")
+                        .HasColumnType("jsonb")
+                        .HasColumnName("provider_metadata_json");
+
+                    b.Property<string>("SyncStatus")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("sync_status");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_external_record_link");
+
+                    b.HasIndex("IntegrationConnectionId", "ExternalEntityType", "ExternalId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_external_record_link_integration_connection_id_external_ent");
+
+                    b.HasIndex("IntegrationConnectionId", "InternalEntityType", "InternalEntityId", "ExternalEntityType")
+                        .IsUnique()
+                        .HasDatabaseName("ix_external_record_link_integration_connection_id_internal_ent");
+
+                    b.ToTable("external_record_link", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.IntegrationConnection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("AuthType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("auth_type");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("display_name");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_synced_at");
+
+                    b.Property<string>("MetadataJson")
+                        .HasColumnType("jsonb")
+                        .HasColumnName("metadata_json");
+
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("provider");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_integration_connection");
+
+                    b.HasIndex("Provider", "DisplayName")
+                        .IsUnique()
+                        .HasDatabaseName("ix_integration_connection_provider_display_name");
+
+                    b.ToTable("integration_connection", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.IntegrationSyncLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("direction");
+
+                    b.Property<Guid?>("ExternalRecordLinkId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("external_record_link_id");
+
+                    b.Property<Guid>("IntegrationConnectionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("integration_connection_id");
+
+                    b.Property<string>("Message")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)")
+                        .HasColumnName("message");
+
+                    b.Property<string>("PayloadJson")
+                        .HasColumnType("jsonb")
+                        .HasColumnName("payload_json");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id")
+                        .HasName("pk_integration_sync_log");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("ix_integration_sync_log_created_at");
+
+                    b.HasIndex("ExternalRecordLinkId")
+                        .HasDatabaseName("ix_integration_sync_log_external_record_link_id");
+
+                    b.HasIndex("IntegrationConnectionId")
+                        .HasDatabaseName("ix_integration_sync_log_integration_connection_id");
+
+                    b.ToTable("integration_sync_log", (string)null);
+                });
+
             modelBuilder.Entity("API.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -643,6 +831,38 @@ namespace API.Data.Migrations
                     b.Navigation("Contact");
                 });
 
+            modelBuilder.Entity("API.Models.ExternalRecordLink", b =>
+                {
+                    b.HasOne("API.Models.IntegrationConnection", "IntegrationConnection")
+                        .WithMany("ExternalRecordLinks")
+                        .HasForeignKey("IntegrationConnectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_external_record_link_integration_connection_integration_con");
+
+                    b.Navigation("IntegrationConnection");
+                });
+
+            modelBuilder.Entity("API.Models.IntegrationSyncLog", b =>
+                {
+                    b.HasOne("API.Models.ExternalRecordLink", "ExternalRecordLink")
+                        .WithMany("SyncLogs")
+                        .HasForeignKey("ExternalRecordLinkId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("fk_integration_sync_log_external_record_link_external_record_l");
+
+                    b.HasOne("API.Models.IntegrationConnection", "IntegrationConnection")
+                        .WithMany("SyncLogs")
+                        .HasForeignKey("IntegrationConnectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_integration_sync_log_integration_connection_integration_con");
+
+                    b.Navigation("ExternalRecordLink");
+
+                    b.Navigation("IntegrationConnection");
+                });
+
             modelBuilder.Entity("API.Models.Company", b =>
                 {
                     b.Navigation("CompanyContacts");
@@ -662,6 +882,18 @@ namespace API.Data.Migrations
                     b.Navigation("CompanyContacts");
 
                     b.Navigation("Emails");
+                });
+
+            modelBuilder.Entity("API.Models.ExternalRecordLink", b =>
+                {
+                    b.Navigation("SyncLogs");
+                });
+
+            modelBuilder.Entity("API.Models.IntegrationConnection", b =>
+                {
+                    b.Navigation("ExternalRecordLinks");
+
+                    b.Navigation("SyncLogs");
                 });
 
             modelBuilder.Entity("API.Models.Role", b =>
