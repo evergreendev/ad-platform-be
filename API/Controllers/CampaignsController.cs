@@ -6,24 +6,32 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-/*[Authorize] todo add back in after testing*/
-public class CampaignsController(): ControllerBase
+[Authorize]
+public class CampaignsController(ICampaignService campaignService) : ControllerBase
 {
     [HttpPost]
-    public IActionResult CreateCampaign(Campaign campaign)
+    public async Task<IActionResult> CreateCampaign(Campaign campaign)
     {
-        return Ok();
+        var createdCampaign = await campaignService.CreateCampaignAsync(campaign);
+        return CreatedAtAction(nameof(GetCampaignById), new { id = createdCampaign.Id }, createdCampaign);
     }
     
     [HttpGet]
-    public IActionResult GetCampaigns()
+    public async Task<IActionResult> GetCampaigns()
     {
-        return Ok();
+        var campaigns = await campaignService.GetCampaignsAsync();
+        return Ok(campaigns);
     }
     
     [HttpGet("{id}")]
-    public IActionResult GetCampaignById(int id)
+    public async Task<IActionResult> GetCampaignById(Guid id)
     {
-        return Ok();
+        var campaign = await campaignService.GetCampaignByIdAsync(id);
+        if (campaign == null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(campaign);
     }
 }

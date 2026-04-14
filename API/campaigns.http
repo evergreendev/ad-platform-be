@@ -1,0 +1,23 @@
+﻿@hostname=localhost
+@port=7227
+@baseUrl=https://{{hostname}}:{{port}}/api
+
+### Get all campaigns
+GET {{baseUrl}}/Campaigns
+Accept: application/json
+
+### Create a new campaign
+POST {{baseUrl}}/Campaigns
+Content-Type: application/json
+
+{
+  "name": "Spring Sale 2026",
+  "description": "Promotion for the spring collection",
+  "status": "Draft"
+}
+
+### Get campaign by ID
+# Replace {id} with a valid campaign GUID
+@campaignId = 00000000-0000-0000-0000-000000000000
+GET {{baseUrl}}/Campaigns/{{campaignId}}
+Accept: application/json
