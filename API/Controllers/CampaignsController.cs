@@ -34,4 +34,18 @@ public class CampaignsController(ICampaignService campaignService) : ControllerB
         
         return Ok(campaign);
     }
+
+    [HttpPost("{id}/contacts")]
+    public async Task<IActionResult> AddContacts(Guid id, [FromBody] IEnumerable<Guid> contactIds)
+    {
+        try
+        {
+            await campaignService.AddContactsToCampaignAsync(id, contactIds);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
 }

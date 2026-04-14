@@ -21,3 +21,12 @@ Content-Type: application/json
 @campaignId = 00000000-0000-0000-0000-000000000000
 GET {{baseUrl}}/Campaigns/{{campaignId}}
 Accept: application/json
+
+### Add contacts to campaign
+POST {{baseUrl}}/Campaigns/{{campaignId}}/contacts
+Content-Type: application/json
+
+[
+  "00000000-0000-0000-0000-000000000000",
+  "00000000-0000-0000-0000-000000000001"
+]
