@@ -22,6 +22,145 @@ namespace API.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("API.Models.Campaign", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_campaigns");
+
+                    b.ToTable("campaigns", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.CampaignActivity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("activity_type");
+
+                    b.Property<Guid>("CampaignContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("campaign_contact_id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("notes");
+
+                    b.HasKey("Id")
+                        .HasName("pk_campaign_activities");
+
+                    b.HasIndex("CampaignContactId")
+                        .HasDatabaseName("ix_campaign_activities_campaign_contact_id");
+
+                    b.ToTable("campaign_activities", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.CampaignActivityEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CampaignActivityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("campaign_activity_id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("notes");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id")
+                        .HasName("pk_campaign_activity_events");
+
+                    b.HasIndex("CampaignActivityId")
+                        .HasDatabaseName("ix_campaign_activity_events_campaign_activity_id");
+
+                    b.ToTable("campaign_activity_events", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.CampaignContact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("AssignedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("assigned_at");
+
+                    b.Property<Guid>("CampaignId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("campaign_id");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_campaign_contacts");
+
+                    b.HasIndex("CampaignId")
+                        .HasDatabaseName("ix_campaign_contacts_campaign_id");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_campaign_contacts_contact_id");
+
+                    b.ToTable("campaign_contacts", (string)null);
+                });
+
             modelBuilder.Entity("API.Models.Company", b =>
                 {
                     b.Property<Guid>("Id")
@@ -753,6 +892,51 @@ namespace API.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("API.Models.CampaignActivity", b =>
+                {
+                    b.HasOne("API.Models.CampaignContact", "CampaignContact")
+                        .WithMany("Activities")
+                        .HasForeignKey("CampaignContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_campaign_activities_campaign_contacts_campaign_contact_id");
+
+                    b.Navigation("CampaignContact");
+                });
+
+            modelBuilder.Entity("API.Models.CampaignActivityEvent", b =>
+                {
+                    b.HasOne("API.Models.CampaignActivity", "CampaignActivity")
+                        .WithMany("Events")
+                        .HasForeignKey("CampaignActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_campaign_activity_events_campaign_activities_campaign_activ");
+
+                    b.Navigation("CampaignActivity");
+                });
+
+            modelBuilder.Entity("API.Models.CampaignContact", b =>
+                {
+                    b.HasOne("API.Models.Campaign", "Campaign")
+                        .WithMany("CampaignContacts")
+                        .HasForeignKey("CampaignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_campaign_contacts_campaigns_campaign_id");
+
+                    b.HasOne("API.Models.Contact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_campaign_contacts_contacts_contact_id");
+
+                    b.Navigation("Campaign");
+
+                    b.Navigation("Contact");
+                });
+
             modelBuilder.Entity("API.Models.CompanyContact", b =>
                 {
                     b.HasOne("API.Models.Company", "Company")
@@ -861,6 +1045,21 @@ namespace API.Data.Migrations
                     b.Navigation("ExternalRecordLink");
 
                     b.Navigation("IntegrationConnection");
+                });
+
+            modelBuilder.Entity("API.Models.Campaign", b =>
+                {
+                    b.Navigation("CampaignContacts");
+                });
+
+            modelBuilder.Entity("API.Models.CampaignActivity", b =>
+                {
+                    b.Navigation("Events");
+                });
+
+            modelBuilder.Entity("API.Models.CampaignContact", b =>
+                {
+                    b.Navigation("Activities");
                 });
 
             modelBuilder.Entity("API.Models.Company", b =>

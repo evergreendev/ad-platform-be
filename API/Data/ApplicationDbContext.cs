@@ -19,6 +19,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<IntegrationConnection> IntegrationConnections => Set<IntegrationConnection>();
     public DbSet<ExternalRecordLink> ExternalRecordLinks => Set<ExternalRecordLink>();
     public DbSet<IntegrationSyncLog> IntegrationSyncLogs => Set<IntegrationSyncLog>();
+    
+    public DbSet<Campaign> Campaigns => Set<Campaign>();
+    public DbSet<CampaignContact> CampaignContacts => Set<CampaignContact>();
+    public DbSet<CampaignActivity> CampaignActivities => Set<CampaignActivity>();
+    public DbSet<CampaignActivityEvent> CampaignActivityEvents => Set<CampaignActivityEvent>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -34,6 +39,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.ApplyConfiguration(new IntegrationConnectionConfiguration());
         builder.ApplyConfiguration(new ExternalRecordLinkConfiguration());
         builder.ApplyConfiguration(new IntegrationSyncLogConfiguration());
+        
+        builder.ApplyConfiguration(new CampaignConfiguration());
+        builder.ApplyConfiguration(new CampaignContactConfiguration());
+        builder.ApplyConfiguration(new CampaignActivityConfiguration());
+        builder.ApplyConfiguration(new CampaignActivityEventConfiguration());
 
         base.OnModelCreating(builder);
     }
