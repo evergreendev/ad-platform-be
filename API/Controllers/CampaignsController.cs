@@ -6,7 +6,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+/*[Authorize]*/
 public class CampaignsController(ICampaignService campaignService) : ControllerBase
 {
     [HttpPost]

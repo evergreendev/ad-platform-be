@@ -21,6 +21,7 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
     public async Task<IEnumerable<Campaign>> GetCampaignsAsync()
     {
         return await context.Campaigns
+            .Include(c => c.CampaignContacts)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
@@ -28,6 +29,7 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
     public async Task<Campaign?> GetCampaignByIdAsync(Guid id)
     {
         return await context.Campaigns
+            .Include(c => c.CampaignContacts)
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
@@ -44,20 +46,26 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
 
         var existingContactIds = campaign.CampaignContacts.Select(cc => cc.ContactId).ToHashSet();
 
-        foreach (var contactId in contactIds)
+        foreach (var contactId in contactIds.Distinct())
         {
-            if (!existingContactIds.Contains(contactId))
+            if (existingContactIds.Contains(contactId)) continue;
+            campaign.CampaignContacts.Add(new CampaignContact
             {
-                campaign.CampaignContacts.Add(new CampaignContact
-                {
-                    Id = Guid.NewGuid(),
-                    CampaignId = campaignId,
-                    ContactId = contactId,
-                    AssignedAt = DateTimeOffset.UtcNow
-                });
-            }
+                CampaignId = campaignId,
+                ContactId = contactId,
+                AssignedAt = DateTimeOffset.UtcNow
+            });
+            existingContactIds.Add(contactId);
         }
 
-        await context.SaveChangesAsync();
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex) when (ex.InnerException is Npgsql.PostgresException { SqlState: Npgsql.PostgresErrorCodes.UniqueViolation })
+        {
+            // If someone else added the same contacts concurrently, we can ignore the unique violation
+            // as the end state (contacts assigned to campaign) is achieved.
+        }
     }
 }

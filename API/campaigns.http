@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ### Get campaign by ID
 # Replace {id} with a valid campaign GUID
-@campaignId = 00000000-0000-0000-0000-000000000000
+@campaignId = a7383872-91f6-41f8-8440-cbb9ab1775cc
 GET {{baseUrl}}/Campaigns/{{campaignId}}
 Accept: application/json
 
@@ -27,6 +27,6 @@ POST {{baseUrl}}/Campaigns/{{campaignId}}/contacts
 Content-Type: application/json
 
 [
-  "00000000-0000-0000-0000-000000000000",
-  "00000000-0000-0000-0000-000000000001"
+  "9eb6aeb8-42cc-4a01-a365-26a011053c29",
+  "b712fadc-b909-4672-82e9-1fe879be0bea"
 ]

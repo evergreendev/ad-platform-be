@@ -26,5 +26,8 @@ public class CampaignContactConfiguration : IEntityTypeConfiguration<CampaignCon
             .WithOne(x => x.CampaignContact)
             .HasForeignKey(x => x.CampaignContactId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(x => new { x.CampaignId, x.ContactId })
+            .IsUnique();
     }
 }
