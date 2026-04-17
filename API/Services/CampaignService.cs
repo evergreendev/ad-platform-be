@@ -1,5 +1,7 @@
 ﻿using API.Data;
+using API.DTOs;
 using API.DTOs.Campaigns;
+using API.DTOs.Contacts;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,7 +57,29 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
                 Id = cc.Id,
                 CampaignId = cc.CampaignId,
                 ContactId = cc.ContactId,
-                ContactName = cc.Contact != null ? $"{cc.Contact.FirstName} {cc.Contact.LastName}".Trim() : null,
+                Contact = new ContactResponse
+                {
+                    Id = cc.Contact.Id,
+                    FirstName = cc.Contact.FirstName,
+                    LastName = cc.Contact.LastName,
+                    AddressLine1 = cc.Contact.AddressLine1,
+                    AddressLine2 = cc.Contact.AddressLine2,
+                    City = cc.Contact.City,
+                    State = cc.Contact.State,
+                    Zip = cc.Contact.Zip,
+                    Country = cc.Contact.Country,
+                    Salutation = cc.Contact.Salutation,
+                    UserRepId = cc.Contact.UserRepId,
+                    IsActive = cc.Contact.IsActive,
+                    Gender = cc.Contact.Gender,
+                    LeadSource = cc.Contact.LeadSource,
+                    LeadStatus = cc.Contact.LeadStatus,
+                    HubspotId = cc.Contact.HubspotId,
+                    JobTitle = cc.Contact.JobTitle,
+                    Department = cc.Contact.Department,
+                    CreatedDate = cc.Contact.CreatedDate,
+                    LastUpdatedDate = cc.Contact.LastUpdatedDate
+                },
                 AssignedAt = cc.AssignedAt
             }).ToList()
         };
