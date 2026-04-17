@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.DTOs.Campaigns;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +7,7 @@ namespace API.Services;
 
 public class CampaignService(ApplicationDbContext context) : ICampaignService
 {
-    public async Task<Campaign> CreateCampaignAsync(Campaign campaign)
+    public async Task<CampaignResponse> CreateCampaignAsync(Campaign campaign)
     {
         campaign.Id = Guid.NewGuid();
         campaign.CreatedAt = DateTimeOffset.UtcNow;
@@ -15,22 +16,49 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
         context.Campaigns.Add(campaign);
         await context.SaveChangesAsync();
         
-        return campaign;
+        return MapToDto(campaign);
     }
 
-    public async Task<IEnumerable<Campaign>> GetCampaignsAsync()
+    public async Task<IEnumerable<CampaignResponse>> GetCampaignsAsync()
     {
-        return await context.Campaigns
+        var campaigns = await context.Campaigns
             .Include(c => c.CampaignContacts)
+                .ThenInclude(cc => cc.Contact)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
+
+        return campaigns.Select(MapToDto);
     }
 
-    public async Task<Campaign?> GetCampaignByIdAsync(Guid id)
+    public async Task<CampaignResponse?> GetCampaignByIdAsync(Guid id)
     {
-        return await context.Campaigns
+        var campaign = await context.Campaigns
             .Include(c => c.CampaignContacts)
+                .ThenInclude(cc => cc.Contact)
             .FirstOrDefaultAsync(c => c.Id == id);
+
+        return campaign == null ? null : MapToDto(campaign);
+    }
+
+    private static CampaignResponse MapToDto(Campaign campaign)
+    {
+        return new CampaignResponse
+        {
+            Id = campaign.Id,
+            Name = campaign.Name,
+            Description = campaign.Description,
+            Status = campaign.Status,
+            CreatedAt = campaign.CreatedAt,
+            UpdatedAt = campaign.UpdatedAt,
+            Contacts = campaign.CampaignContacts.Select(cc => new CampaignContactResponse
+            {
+                Id = cc.Id,
+                CampaignId = cc.CampaignId,
+                ContactId = cc.ContactId,
+                ContactName = cc.Contact != null ? $"{cc.Contact.FirstName} {cc.Contact.LastName}".Trim() : null,
+                AssignedAt = cc.AssignedAt
+            }).ToList()
+        };
     }
 
     public async Task AddContactsToCampaignAsync(Guid campaignId, IEnumerable<Guid> contactIds)
