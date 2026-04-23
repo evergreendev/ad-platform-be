@@ -19,7 +19,7 @@ public class ExternalIdMap
     // Your internal primary key
     public Guid InternalId { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
 
     // EF Core constructor
     private ExternalIdMap() { }
@@ -38,6 +38,6 @@ public class ExternalIdMap
         SourceId = sourceId;
         EntityType = entityType;
         InternalId = internalId;
-        CreatedAt = DateTime.UtcNow;
+        CreatedAt = DateTimeOffset.UtcNow;
     }
 }

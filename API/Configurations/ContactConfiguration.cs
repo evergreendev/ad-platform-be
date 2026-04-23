@@ -72,10 +72,10 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
 
         // Dates
         builder.Property(x => x.CreatedDate)
-            .HasColumnType("timestamp");
+            .HasColumnType("timestamp with time zone");
 
         builder.Property(x => x.LastUpdatedDate)
-            .HasColumnType("timestamp");
+            .HasColumnType("timestamp with time zone");
 
         // Relationships
 

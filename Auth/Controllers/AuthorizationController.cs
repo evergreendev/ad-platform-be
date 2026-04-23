@@ -107,29 +107,52 @@ public class AuthorizationController(
         var request = HttpContext.GetOpenIddictServerRequest()
                       ?? throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
-        // These are the grant types you'll see with code flow + refresh tokens.
-        if (!request.IsAuthorizationCodeGrantType() && !request.IsRefreshTokenGrantType())
+        if (request.IsPasswordGrantType())
         {
-            return BadRequest(new { error = "unsupported_grant_type" });
+            var user = await userManager.FindByNameAsync(request.Username!);
+            if (user == null || (await signInManager.CheckPasswordSignInAsync(user, request.Password!, true)).Succeeded == false)
+            {
+                return Forbid(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            }
+
+            var principal = await signInManager.CreateUserPrincipalAsync(user);
+            
+            // Set the subject claim, which is mandatory for OpenIddict.
+            principal.SetClaim(Claims.Subject, await userManager.GetUserIdAsync(user));
+            
+            principal.SetScopes(request.GetScopes());
+            principal.SetResources("api");
+
+            foreach (var claim in principal.Claims)
+            {
+                claim.SetDestinations(GetDestinations(claim));
+            }
+
+            return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        // Authenticate the token request with OpenIddict to retrieve the principal
-        // stored in the authorization code / refresh token.
-        var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-        if (!result.Succeeded || result.Principal is null)
+        if (request.IsAuthorizationCodeGrantType() || request.IsRefreshTokenGrantType())
         {
-            return Forbid(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            // Authenticate the token request with OpenIddict to retrieve the principal
+            // stored in the authorization code / refresh token.
+            var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            if (!result.Succeeded || result.Principal is null)
+            {
+                return Forbid(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            }
+
+            var principal = result.Principal;
+            
+            // Re-apply destinations (safe; avoids missing claim destinations issues).
+            foreach (var claim in principal.Claims)
+            {
+                claim.SetDestinations(GetDestinations(claim));
+            }
+
+            return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        var principal = result.Principal;
-        
-        // Re-apply destinations (safe; avoids missing claim destinations issues).
-        foreach (var claim in principal.Claims)
-        {
-            claim.SetDestinations(GetDestinations(claim));
-        }
-
-        return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        return BadRequest(new { error = "unsupported_grant_type" });
     }
     
     private static IEnumerable<string> GetDestinations(Claim claim)

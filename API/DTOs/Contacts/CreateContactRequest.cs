@@ -1,10 +1,14 @@
-﻿namespace API.DTOs.Contacts;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class ContactResponse
+namespace API.DTOs.Contacts;
+
+public class CreateContactRequest
 {
-    public Guid Id { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
+    [Required]
+    public string FirstName { get; set; } = null!;
+    [Required]
+    public string LastName { get; set; } = null!;
+    
     public string? AddressLine1 { get; set; }
     public string? AddressLine2 { get; set; }
     public string? City { get; set; }
@@ -13,33 +17,31 @@ public class ContactResponse
     public string? Country { get; set; }
     public string? Salutation { get; set; }
     public string? UserRepId { get; set; }
-    public bool IsActive { get; set; }
+    public bool IsActive { get; set; } = true;
     public string? Gender { get; set; }
     public string? LeadSource { get; set; }
     public string? LeadStatus { get; set; }
     public string? HubspotId { get; set; }
     public string? JobTitle { get; set; }
     public string? Department { get; set; }
-    public DateTimeOffset? CreatedDate { get; set; }
-    public DateTimeOffset? LastUpdatedDate { get; set; }
 
-    public ICollection<ContactEmailResponse> Emails { get; set; } = new List<ContactEmailResponse>();
-    public ICollection<ContactCompanyResponse> Companies { get; set; } = new List<ContactCompanyResponse>();
+    public List<ContactEmailDto> Emails { get; set; } = new();
+    public List<ContactCompanyDto> Companies { get; set; } = new();
 }
 
-public class ContactEmailResponse
+public class ContactEmailDto
 {
-    public Guid Id { get; set; }
+    [Required]
+    [EmailAddress]
     public string Email { get; set; } = null!;
+    public string? Label { get; set; }
     public bool IsPrimary { get; set; }
-    public bool DoNotEmail { get; set; }
 }
 
-public class ContactCompanyResponse
+public class ContactCompanyDto
 {
-    public Guid Id { get; set; }
+    [Required]
     public Guid CompanyId { get; set; }
-    public string CompanyName { get; set; } = null!;
     public bool IsPrimary { get; set; }
     public string? Notes { get; set; }
 }

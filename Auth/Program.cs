@@ -57,10 +57,19 @@ builder.Services.AddOpenIddict()
             .SetIntrospectionEndpointUris("/connect/introspect");
 
         options.AllowAuthorizationCodeFlow();
-
+        if (builder.Environment.IsDevelopment())
+        {
+            options.AllowPasswordFlow();
+        }
         options.RequireProofKeyForCodeExchange();
 
         options.AllowRefreshTokenFlow();
+        
+        if (builder.Environment.IsDevelopment())
+        {
+            options.DisableAccessTokenEncryption();
+        }
+
                 // Register the encryption credentials. This sample uses a symmetric
         // encryption key that is shared between the server and the API project.
         var encryptionKey = builder.Configuration["OpenIddict:EncryptionKey"];

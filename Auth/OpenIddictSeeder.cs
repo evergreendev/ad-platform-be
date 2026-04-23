@@ -39,7 +39,8 @@ public class OpenIddictSeeder
         var redirectUri = new Uri("https://localhost:3000/api/auth/callback/openiddict");
         var postLogoutRedirectUri = new Uri("https://localhost:3000");
 
-        if (await appManager.FindByClientIdAsync(clientId) is null)
+        var application = await appManager.FindByClientIdAsync(clientId);
+        if (application is null)
         {
             var descriptor = new OpenIddictApplicationDescriptor
             {
@@ -62,6 +63,7 @@ public class OpenIddictSeeder
                     // grant types
                     OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
+                    OpenIddictConstants.Permissions.GrantTypes.Password,
 
                     // response types
                     OpenIddictConstants.Permissions.ResponseTypes.Code,
@@ -81,6 +83,43 @@ public class OpenIddictSeeder
             };
             
             await appManager.CreateAsync(descriptor);
+        }
+        else
+        {
+            // Update existing client with latest permissions in dev
+            var descriptor = new OpenIddictApplicationDescriptor();
+            await appManager.PopulateAsync(descriptor, application);
+            
+            var permissions = new List<string>
+            {
+                OpenIddictConstants.Permissions.Endpoints.Authorization,
+                OpenIddictConstants.Permissions.Endpoints.Token,
+                OpenIddictConstants.Permissions.Endpoints.Introspection,
+                OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
+                OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
+                OpenIddictConstants.Permissions.GrantTypes.Password,
+                OpenIddictConstants.Permissions.ResponseTypes.Code,
+                OpenIddictConstants.Scopes.OpenId,
+                OpenIddictConstants.Permissions.Scopes.Profile,
+                OpenIddictConstants.Permissions.Scopes.Email,
+                OpenIddictConstants.Permissions.Prefixes.Scope + "api",
+                OpenIddictConstants.Permissions.Scopes.Roles
+            };
+
+            var needsUpdate = false;
+            foreach (var permission in permissions)
+            {
+                if (!descriptor.Permissions.Contains(permission))
+                {
+                    descriptor.Permissions.Add(permission);
+                    needsUpdate = true;
+                }
+            }
+
+            if (needsUpdate)
+            {
+                await appManager.UpdateAsync(application, descriptor);
+            }
         }
 
         var devEmail = "joe@egmrc.com";

@@ -19,10 +19,10 @@ public class CompanyContactConfiguration : IEntityTypeConfiguration<CompanyConta
             .HasDefaultValue(false);
 
         builder.Property(x => x.StartDate)
-            .HasColumnType("timestamp");
+            .HasColumnType("timestamp with time zone");
 
         builder.Property(x => x.EndDate)
-            .HasColumnType("timestamp");
+            .HasColumnType("timestamp with time zone");
 
         builder.Property(x => x.Notes)
             .HasMaxLength(2000);

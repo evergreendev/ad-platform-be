@@ -18,35 +18,39 @@ scope=api openid profile
     client.global.set("auth_token", response.body.access_token);
 %}
 
-### Get all campaigns
-GET {{baseUrl}}/Campaigns
+### Get all contacts
+GET {{baseUrl}}/Contacts
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 
-### Create a new campaign
-POST {{baseUrl}}/Campaigns
+### Create a new contact
+POST {{baseUrl}}/Contacts
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "name": "Spring Sale 2026",
-  "description": "Promotion for the spring collection",
-  "status": "Draft"
+  "firstName": "John",
+  "lastName": "Doe",
+  "addressLine1": "123 Main St",
+  "city": "New York",
+  "state": "NY",
+  "zip": "10001",
+  "country": "USA",
+  "emails": [
+    {
+      "email": "john.doe@example.com",
+      "isPrimary": true
+    },
+    {
+      "email": "j.doe@work.com",
+      "isPrimary": false
+    }
+  ]
 }
 
-### Get campaign by ID
-# Replace {id} with a valid campaign GUID
-@campaignId = a7383872-91f6-41f8-8440-cbb9ab1775cc
-GET {{baseUrl}}/Campaigns/{{campaignId}}
+### Get contact by ID
+# Replace {id} with a valid contact GUID
+@contactId = 00000000-0000-0000-0000-000000000000
+GET {{baseUrl}}/Contacts/{{contactId}}
 Accept: application/json
 Authorization: Bearer {{auth_token}}
-
-### Add contacts to campaign
-POST {{baseUrl}}/Campaigns/{{campaignId}}/contacts
-Content-Type: application/json
-Authorization: Bearer {{auth_token}}
-*
-[
-  "9eb6aeb8-42cc-4a01-a365-26a011053c29",
-  "b712fadc-b909-4672-82e9-1fe879be0bea"
-]

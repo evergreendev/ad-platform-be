@@ -1,0 +1,59 @@
+﻿@hostname=localhost
+@port=7227
+@authPort=7032
+@baseUrl=https://{{hostname}}:{{port}}/api
+
+### Get Access Token
+POST https://{{hostname}}:{{authPort}}/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&
+username=joe@egmrc.com&
+password={{devPassword}}&
+client_id=next-app&
+client_secret={{clientSecret}}&
+scope=api openid profile
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+%}
+
+### Get all companies
+GET {{baseUrl}}/Companies
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
+### Search companies
+GET {{baseUrl}}/Companies/search?name=Test
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
+### Create a new company
+POST {{baseUrl}}/Companies
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "companyName": "Acme Corp",
+  "address": "123 Industrial Way",
+  "city": "Springfield",
+  "state": "IL",
+  "zip": "62704",
+  "country": "USA",
+  "websiteUrl": "https://acme.example.com",
+  "type": "Client",
+  "contacts": [
+    {
+      "contactId": "d79589bf-73fc-4973-92fd-17667d27ee41",
+      "isPrimary": true,
+      "notes": "Main point of contact"
+    }
+  ]
+}
+
+### Get company by ID
+# Replace {id} with a valid company GUID
+@companyId = 00000000-0000-0000-0000-000000000000
+GET {{baseUrl}}/Companies/{{companyId}}
+Accept: application/json
+Authorization: Bearer {{auth_token}}

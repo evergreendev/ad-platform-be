@@ -23,7 +23,7 @@ public class Contact
     public string? HubspotId { get; set; }
     public string? JobTitle { get; set; }
     public string? Department { get; set; }
-    public DateTime? CreatedDate { get; set; }
-    public DateTime? LastUpdatedDate { get; set; }
+    public DateTimeOffset? CreatedDate { get; set; }
+    public DateTimeOffset? LastUpdatedDate { get; set; }
 }
 

@@ -71,7 +71,9 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddScoped<ICompanySearchService, DbCompanySearchService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
+builder.Services.AddScoped<IContactService, ContactService>();
 
 var app = builder.Build();
 

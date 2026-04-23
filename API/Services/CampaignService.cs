@@ -26,6 +26,11 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
         var campaigns = await context.Campaigns
             .Include(c => c.CampaignContacts)
                 .ThenInclude(cc => cc.Contact)
+                    .ThenInclude(c => c.Emails)
+            .Include(c => c.CampaignContacts)
+                .ThenInclude(cc => cc.Contact)
+                    .ThenInclude(c => c.CompanyContacts)
+                        .ThenInclude(cc => cc.Company)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
 
@@ -37,6 +42,11 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
         var campaign = await context.Campaigns
             .Include(c => c.CampaignContacts)
                 .ThenInclude(cc => cc.Contact)
+                    .ThenInclude(c => c.Emails)
+            .Include(c => c.CampaignContacts)
+                .ThenInclude(cc => cc.Contact)
+                    .ThenInclude(c => c.CompanyContacts)
+                        .ThenInclude(cc => cc.Company)
             .FirstOrDefaultAsync(c => c.Id == id);
 
         return campaign == null ? null : MapToDto(campaign);
@@ -78,7 +88,22 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
                     JobTitle = cc.Contact.JobTitle,
                     Department = cc.Contact.Department,
                     CreatedDate = cc.Contact.CreatedDate,
-                    LastUpdatedDate = cc.Contact.LastUpdatedDate
+                    LastUpdatedDate = cc.Contact.LastUpdatedDate,
+                    Emails = cc.Contact.Emails.Select(e => new ContactEmailResponse
+                    {
+                        Id = e.Id,
+                        Email = e.Email,
+                        IsPrimary = e.IsPrimary,
+                        DoNotEmail = e.DoNotEmail
+                    }).ToList(),
+                    Companies = cc.Contact.CompanyContacts.Select(ccc => new ContactCompanyResponse
+                    {
+                        Id = ccc.Id,
+                        CompanyId = ccc.CompanyId,
+                        CompanyName = ccc.Company?.CompanyName ?? "Unknown",
+                        IsPrimary = ccc.IsPrimary,
+                        Notes = ccc.Notes
+                    }).ToList()
                 },
                 AssignedAt = cc.AssignedAt
             }).ToList()

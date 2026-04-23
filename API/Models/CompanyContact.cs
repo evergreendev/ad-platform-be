@@ -11,8 +11,8 @@ public class CompanyContact
     public Contact Contact { get; set; } = null!;
     
     public bool IsPrimary { get; set; }
-    public DateTime? StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
+    public DateTimeOffset? StartDate { get; set; }
+    public DateTimeOffset? EndDate { get; set; }
     public string? Notes { get; set; }
     public ICollection<CompanyContactRole> Roles { get; set; } = new List<CompanyContactRole>();
     public ICollection<CompanyContactEmail> Emails { get; set; } = new List<CompanyContactEmail>();
