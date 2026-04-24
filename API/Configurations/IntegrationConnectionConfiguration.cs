@@ -16,6 +16,11 @@ public class IntegrationConnectionConfiguration : IEntityTypeConfiguration<Integ
             .IsRequired()
             .HasMaxLength(50);
 
+        builder.Property(x => x.Category)
+            .IsRequired()
+            .HasConversion<string>()
+            .HasMaxLength(50);
+
         builder.Property(x => x.DisplayName)
             .IsRequired()
             .HasMaxLength(200);

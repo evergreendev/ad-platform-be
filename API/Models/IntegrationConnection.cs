@@ -1,10 +1,13 @@
-﻿namespace API.Models;
+﻿using API.Enums;
+
+namespace API.Models;
 
 public class IntegrationConnection
 {
     public Guid Id { get; set; }
     
     public string Provider { get; set; } = null!;
+    public IntegrationCategory Category { get; set; } = IntegrationCategory.EmailMarketing;
     public string DisplayName { get; set; } = null!;
     public bool IsActive { get; set; } = true;
     

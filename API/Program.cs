@@ -74,6 +74,7 @@ builder.Services.AddScoped<ICompanySearchService, DbCompanySearchService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IIntegrationService, IntegrationService>();
 
 var app = builder.Build();
 
