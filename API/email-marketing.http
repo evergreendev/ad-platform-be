@@ -1,0 +1,31 @@
+﻿@hostname=localhost
+@port=7227
+@authPort=7032
+@baseUrl=https://{{hostname}}:{{port}}/api
+
+### Get Access Token
+POST https://{{hostname}}:{{authPort}}/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&
+username=joe@egmrc.com&
+password={{devPassword}}&
+client_id=next-app&
+client_secret={{clientSecret}}&
+scope=api openid profile
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+%}
+
+### Send email (Mailchimp status route placeholder)
+POST {{baseUrl}}/EmailMarketing/send
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "integrationId": "9d657d19-8a9c-4731-82d2-dceaa3b6c299",
+  "toEmail": "customer@example.com",
+  "subject": "Test send",
+  "htmlBody": "<p>Hello from Ad Platform</p>"
+}

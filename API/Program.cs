@@ -75,6 +75,8 @@ builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IIntegrationService, IntegrationService>();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IEmailMarketingService, EmailMarketingService>();
 
 var app = builder.Build();
 
