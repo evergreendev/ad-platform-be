@@ -13,8 +13,15 @@ public class IntegrationsController(IIntegrationService integrationService) : Co
     [HttpPost]
     public async Task<ActionResult<IntegrationResponse>> CreateIntegration(CreateIntegrationRequest request)
     {
-        var createdIntegration = await integrationService.CreateIntegrationAsync(request);
-        return CreatedAtAction(nameof(GetIntegrationById), new { id = createdIntegration.Id }, createdIntegration);
+        try
+        {
+            var createdIntegration = await integrationService.CreateIntegrationAsync(request);
+            return CreatedAtAction(nameof(GetIntegrationById), new { id = createdIntegration.Id }, createdIntegration);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
     }
 
     [HttpGet("{id}")]

@@ -9,6 +9,14 @@ public class IntegrationService(ApplicationDbContext context) : IIntegrationServ
 {
     public async Task<IntegrationResponse> CreateIntegrationAsync(CreateIntegrationRequest request)
     {
+        var existing = await context.IntegrationConnections
+            .AnyAsync(x => x.Provider == request.Provider && x.DisplayName == request.DisplayName);
+
+        if (existing)
+        {
+            throw new InvalidOperationException($"Integration with provider '{request.Provider}' and name '{request.DisplayName}' already exists.");
+        }
+
         var integrationConnection = new IntegrationConnection
         {
             Id = Guid.NewGuid(),
