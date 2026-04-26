@@ -30,14 +30,49 @@ public class EmailMarketingService(IIntegrationService integrationService, IHttp
             throw new ArgumentException("Only Mailchimp provider is supported for this endpoint right now.");
         }
 
-        var providerStatus = await CheckMailchimpStatusAsync(cancellationToken);
+        var apiKey = configuration["Integrations:Mailchimp:ApiKey"];
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            throw new InvalidOperationException("Missing configuration key Integrations:Mailchimp:ApiKey.");
+        }
+
+        var client = httpClientFactory.CreateClient();
+        var sendRequest = new
+        {
+            key = apiKey,
+            message = new
+            {
+                html = request.HtmlBody,
+                subject = request.Subject,
+                from_email = configuration["Integrations:Mailchimp:FromEmail"] ?? "noreply@ad-platform.com",
+                from_name = configuration["Integrations:Mailchimp:FromName"] ?? "Ad Platform",
+                to = new[]
+                {
+                    new { email = request.ToEmail, type = "to" }
+                }
+            }
+        };
+
+        var response = await client.PostAsJsonAsync("https://mandrillapp.com/api/1.0/messages/send", sendRequest, cancellationToken);
+        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpRequestException($"Mailchimp API returned error: {response.StatusCode} - {responseBody}");
+        }
+
+        using var document = JsonDocument.Parse(responseBody);
+        var firstResult = document.RootElement[0];
+        var status = firstResult.GetProperty("status").GetString();
+
+        var success = status is "sent" or "queued" or "scheduled";
 
         return new SendEmailResponse
         {
-            Success = true,
+            Success = success,
             Provider = integration.Provider,
-            Message = "Mailchimp status check succeeded. Placeholder send route is healthy.",
-            ProviderStatus = providerStatus
+            Message = success ? $"Email {status} successfully via Mailchimp." : $"Mailchimp failed to send: {status}",
+            ProviderStatus = status
         };
     }
 
@@ -49,32 +84,17 @@ public class EmailMarketingService(IIntegrationService integrationService, IHttp
             throw new InvalidOperationException("Missing configuration key Integrations:Mailchimp:ApiKey.");
         }
 
-        var dataCenter = configuration["Integrations:Mailchimp:DataCenter"];
-        if (string.IsNullOrWhiteSpace(dataCenter))
-        {
-            var keyParts = apiKey.Split('-', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            dataCenter = keyParts.Length > 1 ? keyParts[^1] : null;
-        }
-
-        if (string.IsNullOrWhiteSpace(dataCenter))
-        {
-            throw new InvalidOperationException("Mailchimp data center is missing. Set Integrations:Mailchimp:DataCenter or use an API key with dc suffix (example: key-us1).");
-        }
-
         var client = httpClientFactory.CreateClient();
-        var credentials = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"any:{apiKey}"));
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+        var pingRequest = new { key = apiKey };
 
-        using var response = await client.GetAsync($"https://{dataCenter}.api.mailchimp.com/3.0/ping", cancellationToken);
+        using var response = await client.PostAsJsonAsync("https://mandrillapp.com/api/1.0/users/ping", pingRequest, cancellationToken);
         var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
-        response.EnsureSuccessStatusCode();
-
-        using var document = JsonDocument.Parse(responseBody);
-        if (document.RootElement.TryGetProperty("health_status", out var healthStatus))
+        
+        if (!response.IsSuccessStatusCode)
         {
-            return healthStatus.GetString();
+            return $"Error: {response.StatusCode}";
         }
 
-        return null;
+        return responseBody.Trim('\"'); // Returns "PONG!"
     }
 }

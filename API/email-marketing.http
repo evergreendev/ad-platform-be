@@ -18,13 +18,13 @@ scope=api openid profile
     client.global.set("auth_token", response.body.access_token);
 %}
 
-### Send email (Mailchimp status route placeholder)
+### Send email
 POST {{baseUrl}}/EmailMarketing/send
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "integrationId": "9d657d19-8a9c-4731-82d2-dceaa3b6c299",
+  "integrationId": "679fa751-e8c0-447d-8e62-43ead1ec73d4",
   "toEmail": "customer@example.com",
   "subject": "Test send",
   "htmlBody": "<p>Hello from Ad Platform</p>"
