@@ -49,4 +49,18 @@ public class CampaignsController(ICampaignService campaignService) : ControllerB
             return NotFound(ex.Message);
         }
     }
+
+    [HttpPost("{id}/companies")]
+    public async Task<IActionResult> AddCompanyContacts(Guid id, [FromBody] AddCompaniesToCampaignRequest request)
+    {
+        try
+        {
+            await campaignService.AddContactsToCampaignByCompaniesAsync(id, request);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
 }

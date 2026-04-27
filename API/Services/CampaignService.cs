@@ -145,4 +145,38 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
             // as the end state (contacts assigned to campaign) is achieved.
         }
     }
+
+    public async Task AddContactsToCampaignByCompaniesAsync(Guid campaignId, AddCompaniesToCampaignRequest request)
+    {
+        var companyIds = request.CompanyIds.Distinct().ToList();
+        var roleIds = request.CompanyContactRoleIds.Distinct().ToList();
+
+        if (companyIds.Count == 0)
+        {
+            await AddContactsToCampaignAsync(campaignId, []);
+            return;
+        }
+
+        var companyContactsQuery = context.CompanyContacts
+            .AsNoTracking()
+            .Where(cc => companyIds.Contains(cc.CompanyId));
+
+        if (request.PrimaryContactsOnly)
+        {
+            companyContactsQuery = companyContactsQuery.Where(cc => cc.IsPrimary);
+        }
+
+        if (roleIds.Count > 0)
+        {
+            companyContactsQuery = companyContactsQuery
+                .Where(cc => cc.Roles.Any(r => roleIds.Contains(r.RoleId)));
+        }
+
+        var contactIds = await companyContactsQuery
+            .Select(cc => cc.ContactId)
+            .Distinct()
+            .ToListAsync();
+
+        await AddContactsToCampaignAsync(campaignId, contactIds);
+    }
 }

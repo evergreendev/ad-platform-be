@@ -44,9 +44,10 @@ Authorization: Bearer {{auth_token}}
   "type": "Client",
   "contacts": [
     {
-      "contactId": "d79589bf-73fc-4973-92fd-17667d27ee41",
+      "contactId": "4c2c333c-571c-47f4-9147-03df7b8cfdf6",
       "isPrimary": true,
-      "notes": "Main point of contact"
+      "notes": "Main point of contact",
+      "role": 2
     }
   ]
 }
