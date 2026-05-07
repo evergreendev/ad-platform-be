@@ -50,6 +50,20 @@ public class CampaignsController(ICampaignService campaignService) : ControllerB
         }
     }
 
+    [HttpDelete("{id}/contacts")]
+    public async Task<IActionResult> RemoveContacts(Guid id, [FromBody] IEnumerable<Guid> contactIds)
+    {
+        try
+        {
+            await campaignService.RemoveContactsFromCampaignAsync(id, contactIds);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
     [HttpPost("{id}/companies")]
     public async Task<IActionResult> AddCompanyContacts(Guid id, [FromBody] AddCompaniesToCampaignRequest request)
     {

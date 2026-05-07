@@ -10,4 +10,5 @@ public interface ICampaignService
     Task<CampaignResponse?> GetCampaignByIdAsync(Guid id);
     Task AddContactsToCampaignAsync(Guid campaignId, IEnumerable<Guid> contactIds);
     Task AddContactsToCampaignByCompaniesAsync(Guid campaignId, AddCompaniesToCampaignRequest request);
+    Task RemoveContactsFromCampaignAsync(Guid campaignId, IEnumerable<Guid> contactIds);
 }

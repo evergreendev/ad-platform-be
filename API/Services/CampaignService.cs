@@ -179,4 +179,28 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
 
         await AddContactsToCampaignAsync(campaignId, contactIds);
     }
+
+    public async Task RemoveContactsFromCampaignAsync(Guid campaignId, IEnumerable<Guid> contactIds)
+    {
+        var campaignExists = await context.Campaigns.AnyAsync(c => c.Id == campaignId);
+
+        if (!campaignExists)
+        {
+            throw new ArgumentException("Campaign not found", nameof(campaignId));
+        }
+
+        var contactIdsToRemove = contactIds.Distinct().ToList();
+
+        if (contactIdsToRemove.Count == 0)
+        {
+            return;
+        }
+
+        var campaignContacts = await context.CampaignContacts
+            .Where(cc => cc.CampaignId == campaignId && contactIdsToRemove.Contains(cc.ContactId))
+            .ToListAsync();
+
+        context.CampaignContacts.RemoveRange(campaignContacts);
+        await context.SaveChangesAsync();
+    }
 }
