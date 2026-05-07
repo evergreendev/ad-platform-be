@@ -8,6 +8,12 @@
         <RootNamespace>API</RootNamespace>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <AssemblyName>API</AssemblyName>
+        <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
+        <OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
+        <OpenApiOutputDirectory Condition="'$(OpenApiOutputDirectory)' == ''">$(MSBuildProjectDirectory)\openapi</OpenApiOutputDirectory>
+        <_ResolvedOpenApiOutputDirectory>$(OpenApiOutputDirectory)</_ResolvedOpenApiOutputDirectory>
+        <_ResolvedOpenApiOutputDirectory Condition="!$([System.IO.Path]::IsPathRooted('$(OpenApiOutputDirectory)'))">$(MSBuildProjectDirectory)\$(OpenApiOutputDirectory)</_ResolvedOpenApiOutputDirectory>
+        <OpenApiDocumentsDirectory>$(_ResolvedOpenApiOutputDirectory)</OpenApiDocumentsDirectory>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,9 +22,14 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.22"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.22" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.22"/>
+        <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="8.0.22">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
         <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="7.2.0" />
         <PackageReference Include="OpenIddict.Validation.SystemNetHttp" Version="7.2.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
     </ItemGroup>
 
@@ -100,4 +111,14 @@
     <ItemGroup>
       <Folder Include="Data\Migrations\" />
     </ItemGroup>
+
+    <Target Name="GenerateOpenApiDocumentAfterBuild" AfterTargets="Build" Condition="'$(OpenApiGenerateDocuments)' == 'true'">
+        <Delete Files="$(BaseIntermediateOutputPath)$(MSBuildProjectName).OpenApiFiles.cache" />
+        <CallTarget Targets="GenerateOpenApiDocuments" />
+    </Target>
+
+    <Target Name="RenameOpenApiDocument" AfterTargets="GenerateOpenApiDocuments" Condition="Exists('$(OpenApiDocumentsDirectory)\$(MSBuildProjectName).json')">
+        <Copy SourceFiles="$(OpenApiDocumentsDirectory)\$(MSBuildProjectName).json" DestinationFiles="$(OpenApiDocumentsDirectory)\openapi.json" />
+        <Delete Files="$(OpenApiDocumentsDirectory)\$(MSBuildProjectName).json" />
+    </Target>
 </Project>

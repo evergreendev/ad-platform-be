@@ -3,12 +3,14 @@ using API.Data;
 using API.Services;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Default") ??
+                       builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'Default' not found.");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -69,6 +71,15 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Ad Platform API",
+        Version = "v1"
+    });
+});
 
 builder.Services.AddScoped<ICompanySearchService, DbCompanySearchService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
@@ -84,6 +95,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseSwagger();
 }
 else
 {
