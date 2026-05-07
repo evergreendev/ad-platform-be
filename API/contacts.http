@@ -1,7 +1,7 @@
 ﻿@hostname=localhost
 @port=7227
 @authPort=7032
-@baseUrl=https://{{hostname}}:{{port}}/api
+@baseUrl=https://{{hostname}}:{{port}}/api/v1
 
 ### Get Access Token
 POST https://{{hostname}}:{{authPort}}/connect/token

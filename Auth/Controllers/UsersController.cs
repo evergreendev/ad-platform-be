@@ -8,7 +8,7 @@ using OpenIddict.Validation.AspNetCore;
 namespace Auth.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/v1/[controller]")]
 [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme, Roles = "admin")]
 public class UsersController(
     UserManager<ApplicationUser> userManager,

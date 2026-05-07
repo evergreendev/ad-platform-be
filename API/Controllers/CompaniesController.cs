@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [Authorize]
 public class CompaniesController(ICompanySearchService searchService, ICompanyService companyService) : ControllerBase
 {
