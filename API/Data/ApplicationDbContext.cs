@@ -24,6 +24,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<CampaignContact> CampaignContacts => Set<CampaignContact>();
     public DbSet<CampaignActivity> CampaignActivities => Set<CampaignActivity>();
     public DbSet<CampaignActivityEvent> CampaignActivityEvents => Set<CampaignActivityEvent>();
+    public DbSet<MailMergeTemplate> MailMergeTemplates => Set<MailMergeTemplate>();
+    public DbSet<MergeField> MergeFields => Set<MergeField>();
+    public DbSet<MailMergeTemplateField> MailMergeTemplateFields => Set<MailMergeTemplateField>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -44,6 +47,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.ApplyConfiguration(new CampaignContactConfiguration());
         builder.ApplyConfiguration(new CampaignActivityConfiguration());
         builder.ApplyConfiguration(new CampaignActivityEventConfiguration());
+        builder.ApplyConfiguration(new MailMergeTemplateConfiguration());
+        builder.ApplyConfiguration(new MergeFieldConfiguration());
+        builder.ApplyConfiguration(new MailMergeTemplateFieldConfiguration());
 
         base.OnModelCreating(builder);
     }

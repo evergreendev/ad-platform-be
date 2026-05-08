@@ -844,6 +844,100 @@ namespace API.Data.Migrations
                     b.ToTable("integration_sync_log", (string)null);
                 });
 
+            modelBuilder.Entity("API.Models.MailMergeTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("BodyHtml")
+                        .HasColumnType("text")
+                        .HasColumnName("body_html");
+
+                    b.Property<string>("BodyJson")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("body_json");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<string>("PlainText")
+                        .HasColumnType("text")
+                        .HasColumnName("plain_text");
+
+                    b.Property<string>("SubjectTemplate")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("subject_template");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_mail_merge_template");
+
+                    b.ToTable("mail_merge_template", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.MailMergeTemplateField", b =>
+                {
+                    b.Property<Guid>("TemplateId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("template_id");
+
+                    b.Property<string>("MergeFieldKey")
+                        .HasColumnType("text")
+                        .HasColumnName("merge_field_key");
+
+                    b.HasKey("TemplateId", "MergeFieldKey")
+                        .HasName("pk_mail_merge_template_field");
+
+                    b.HasIndex("MergeFieldKey")
+                        .HasDatabaseName("ix_mail_merge_template_field_merge_field_key");
+
+                    b.ToTable("mail_merge_template_field", (string)null);
+                });
+
+            modelBuilder.Entity("API.Models.MergeField", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("text")
+                        .HasColumnName("key");
+
+                    b.Property<string>("DataType")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("data_type");
+
+                    b.Property<string>("Entity")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("entity");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("label");
+
+                    b.HasKey("Key")
+                        .HasName("pk_merge_field");
+
+                    b.ToTable("merge_field", (string)null);
+                });
+
             modelBuilder.Entity("API.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -1054,6 +1148,27 @@ namespace API.Data.Migrations
                     b.Navigation("IntegrationConnection");
                 });
 
+            modelBuilder.Entity("API.Models.MailMergeTemplateField", b =>
+                {
+                    b.HasOne("API.Models.MergeField", "MergeField")
+                        .WithMany("TemplateFields")
+                        .HasForeignKey("MergeFieldKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_mail_merge_template_field_merge_field_merge_field_key");
+
+                    b.HasOne("API.Models.MailMergeTemplate", "Template")
+                        .WithMany("TemplateFields")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_mail_merge_template_field_mail_merge_template_template_id");
+
+                    b.Navigation("MergeField");
+
+                    b.Navigation("Template");
+                });
+
             modelBuilder.Entity("API.Models.Campaign", b =>
                 {
                     b.Navigation("CampaignContacts");
@@ -1100,6 +1215,16 @@ namespace API.Data.Migrations
                     b.Navigation("ExternalRecordLinks");
 
                     b.Navigation("SyncLogs");
+                });
+
+            modelBuilder.Entity("API.Models.MailMergeTemplate", b =>
+                {
+                    b.Navigation("TemplateFields");
+                });
+
+            modelBuilder.Entity("API.Models.MergeField", b =>
+                {
+                    b.Navigation("TemplateFields");
                 });
 
             modelBuilder.Entity("API.Models.Role", b =>
