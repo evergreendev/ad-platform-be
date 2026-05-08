@@ -10,5 +10,5 @@ public class CampaignResponse
     public CampaignStatus Status { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
-    public ICollection<CampaignContactResponse> Contacts { get; set; } = new List<CampaignContactResponse>();
+    public int ContactCount { get; set; }
 }

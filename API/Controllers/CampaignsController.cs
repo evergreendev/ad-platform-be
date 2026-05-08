@@ -1,8 +1,10 @@
-﻿using API.DTOs.Campaigns;
+using API.DTOs;
+using API.DTOs.Campaigns;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 namespace API.Controllers;
 
 [ApiController]
@@ -16,14 +18,14 @@ public class CampaignsController(ICampaignService campaignService) : ControllerB
         var createdCampaign = await campaignService.CreateCampaignAsync(campaign);
         return CreatedAtAction(nameof(GetCampaignById), new { id = createdCampaign.Id }, createdCampaign);
     }
-    
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CampaignResponse>>> GetCampaigns()
     {
         var campaigns = await campaignService.GetCampaignsAsync();
         return Ok(campaigns);
     }
-    
+
     [HttpGet("{id}")]
     public async Task<ActionResult<CampaignResponse>> GetCampaignById(Guid id)
     {
@@ -32,8 +34,22 @@ public class CampaignsController(ICampaignService campaignService) : ControllerB
         {
             return NotFound();
         }
-        
+
         return Ok(campaign);
+    }
+
+    [HttpGet("{id}/contacts")]
+    public async Task<ActionResult<PagedResponse<CampaignContactResponse>>> GetCampaignContacts(
+        Guid id,
+        [FromQuery] CampaignContactsQuery query)
+    {
+        var contacts = await campaignService.GetCampaignContactsAsync(id, query);
+        if (contacts == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(contacts);
     }
 
     [HttpPost("{id}/contacts")]

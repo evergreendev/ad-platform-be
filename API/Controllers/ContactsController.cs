@@ -1,4 +1,5 @@
-﻿using API.DTOs.Contacts;
+using API.DTOs;
+using API.DTOs.Contacts;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,9 @@ public class ContactsController(IContactService contactService) : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ContactResponse>>> GetContacts()
+    public async Task<ActionResult<PagedResponse<ContactResponse>>> GetContacts([FromQuery] ContactsQuery query)
     {
-        var contacts = await contactService.GetContactsAsync();
+        var contacts = await contactService.GetContactsAsync(query);
         return Ok(contacts);
     }
 

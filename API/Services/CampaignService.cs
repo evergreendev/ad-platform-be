@@ -1,4 +1,4 @@
-﻿using API.Data;
+using API.Data;
 using API.DTOs;
 using API.DTOs.Campaigns;
 using API.DTOs.Contacts;
@@ -9,104 +9,91 @@ namespace API.Services;
 
 public class CampaignService(ApplicationDbContext context) : ICampaignService
 {
+    private const int MaxCampaignContactsPageSize = 100;
+
     public async Task<CampaignResponse> CreateCampaignAsync(Campaign campaign)
     {
         campaign.Id = Guid.NewGuid();
         campaign.CreatedAt = DateTimeOffset.UtcNow;
         campaign.UpdatedAt = DateTimeOffset.UtcNow;
-        
+
         context.Campaigns.Add(campaign);
         await context.SaveChangesAsync();
-        
+
         return MapToDto(campaign);
     }
 
     public async Task<IEnumerable<CampaignResponse>> GetCampaignsAsync()
     {
-        var campaigns = await context.Campaigns
-            .Include(c => c.CampaignContacts)
-                .ThenInclude(cc => cc.Contact)
-                    .ThenInclude(c => c.Emails)
-            .Include(c => c.CampaignContacts)
-                .ThenInclude(cc => cc.Contact)
-                    .ThenInclude(c => c.CompanyContacts)
-                        .ThenInclude(cc => cc.Company)
+        return await context.Campaigns
             .OrderByDescending(c => c.CreatedAt)
+            .Select(c => new CampaignResponse
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Status = c.Status,
+                CreatedAt = c.CreatedAt,
+                UpdatedAt = c.UpdatedAt,
+                ContactCount = c.CampaignContacts.Count
+            })
             .ToListAsync();
-
-        return campaigns.Select(MapToDto);
     }
 
     public async Task<CampaignResponse?> GetCampaignByIdAsync(Guid id)
     {
-        var campaign = await context.Campaigns
-            .Include(c => c.CampaignContacts)
-                .ThenInclude(cc => cc.Contact)
-                    .ThenInclude(c => c.Emails)
-            .Include(c => c.CampaignContacts)
-                .ThenInclude(cc => cc.Contact)
-                    .ThenInclude(c => c.CompanyContacts)
-                        .ThenInclude(cc => cc.Company)
-            .FirstOrDefaultAsync(c => c.Id == id);
-
-        return campaign == null ? null : MapToDto(campaign);
+        return await context.Campaigns
+            .Where(c => c.Id == id)
+            .Select(c => new CampaignResponse
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Status = c.Status,
+                CreatedAt = c.CreatedAt,
+                UpdatedAt = c.UpdatedAt,
+                ContactCount = c.CampaignContacts.Count
+            })
+            .FirstOrDefaultAsync();
     }
 
-    private static CampaignResponse MapToDto(Campaign campaign)
+    public async Task<PagedResponse<CampaignContactResponse>?> GetCampaignContactsAsync(
+        Guid campaignId,
+        CampaignContactsQuery query)
     {
-        return new CampaignResponse
+        var campaignExists = await context.Campaigns.AnyAsync(c => c.Id == campaignId);
+        if (!campaignExists)
         {
-            Id = campaign.Id,
-            Name = campaign.Name,
-            Description = campaign.Description,
-            Status = campaign.Status,
-            CreatedAt = campaign.CreatedAt,
-            UpdatedAt = campaign.UpdatedAt,
-            Contacts = campaign.CampaignContacts.Select(cc => new CampaignContactResponse
-            {
-                Id = cc.Id,
-                CampaignId = cc.CampaignId,
-                ContactId = cc.ContactId,
-                Contact = new ContactResponse
-                {
-                    Id = cc.Contact.Id,
-                    FirstName = cc.Contact.FirstName,
-                    LastName = cc.Contact.LastName,
-                    AddressLine1 = cc.Contact.AddressLine1,
-                    AddressLine2 = cc.Contact.AddressLine2,
-                    City = cc.Contact.City,
-                    State = cc.Contact.State,
-                    Zip = cc.Contact.Zip,
-                    Country = cc.Contact.Country,
-                    Salutation = cc.Contact.Salutation,
-                    UserRepId = cc.Contact.UserRepId,
-                    IsActive = cc.Contact.IsActive,
-                    Gender = cc.Contact.Gender,
-                    LeadSource = cc.Contact.LeadSource,
-                    LeadStatus = cc.Contact.LeadStatus,
-                    HubspotId = cc.Contact.HubspotId,
-                    JobTitle = cc.Contact.JobTitle,
-                    Department = cc.Contact.Department,
-                    CreatedDate = cc.Contact.CreatedDate,
-                    LastUpdatedDate = cc.Contact.LastUpdatedDate,
-                    Emails = cc.Contact.Emails.Select(e => new ContactEmailResponse
-                    {
-                        Id = e.Id,
-                        Email = e.Email,
-                        IsPrimary = e.IsPrimary,
-                        DoNotEmail = e.DoNotEmail
-                    }).ToList(),
-                    Companies = cc.Contact.CompanyContacts.Select(ccc => new ContactCompanyResponse
-                    {
-                        Id = ccc.Id,
-                        CompanyId = ccc.CompanyId,
-                        CompanyName = ccc.Company?.CompanyName ?? "Unknown",
-                        IsPrimary = ccc.IsPrimary,
-                        Notes = ccc.Notes
-                    }).ToList()
-                },
-                AssignedAt = cc.AssignedAt
-            }).ToList()
+            return null;
+        }
+
+        var page = Math.Max(query.Page ?? 1, 1);
+        var pageSize = Math.Clamp(query.PageSize ?? 20, 1, MaxCampaignContactsPageSize);
+
+        var dbQuery = context.CampaignContacts
+            .AsNoTracking()
+            .Where(cc => cc.CampaignId == campaignId);
+
+        var totalCount = await dbQuery.CountAsync();
+
+        var items = await dbQuery
+            .Include(cc => cc.Contact)
+                .ThenInclude(c => c.Emails)
+            .Include(cc => cc.Contact)
+                .ThenInclude(c => c.CompanyContacts)
+                    .ThenInclude(cc => cc.Company)
+            .OrderByDescending(cc => cc.AssignedAt)
+            .ThenBy(cc => cc.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResponse<CampaignContactResponse>
+        {
+            Items = items.Select(MapCampaignContactToDto),
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
         };
     }
 
@@ -202,5 +189,73 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
 
         context.CampaignContacts.RemoveRange(campaignContacts);
         await context.SaveChangesAsync();
+    }
+
+    private static CampaignResponse MapToDto(Campaign campaign)
+    {
+        return new CampaignResponse
+        {
+            Id = campaign.Id,
+            Name = campaign.Name,
+            Description = campaign.Description,
+            Status = campaign.Status,
+            CreatedAt = campaign.CreatedAt,
+            UpdatedAt = campaign.UpdatedAt,
+            ContactCount = campaign.CampaignContacts.Count
+        };
+    }
+
+    private static CampaignContactResponse MapCampaignContactToDto(CampaignContact cc)
+    {
+        return new CampaignContactResponse
+        {
+            Id = cc.Id,
+            CampaignId = cc.CampaignId,
+            ContactId = cc.ContactId,
+            Contact = MapContactToDto(cc.Contact),
+            AssignedAt = cc.AssignedAt
+        };
+    }
+
+    private static ContactResponse MapContactToDto(Contact contact)
+    {
+        return new ContactResponse
+        {
+            Id = contact.Id,
+            FirstName = contact.FirstName,
+            LastName = contact.LastName,
+            AddressLine1 = contact.AddressLine1,
+            AddressLine2 = contact.AddressLine2,
+            City = contact.City,
+            State = contact.State,
+            Zip = contact.Zip,
+            Country = contact.Country,
+            Salutation = contact.Salutation,
+            UserRepId = contact.UserRepId,
+            IsActive = contact.IsActive,
+            Gender = contact.Gender,
+            LeadSource = contact.LeadSource,
+            LeadStatus = contact.LeadStatus,
+            HubspotId = contact.HubspotId,
+            JobTitle = contact.JobTitle,
+            Department = contact.Department,
+            CreatedDate = contact.CreatedDate,
+            LastUpdatedDate = contact.LastUpdatedDate,
+            Emails = contact.Emails.Select(e => new ContactEmailResponse
+            {
+                Id = e.Id,
+                Email = e.Email,
+                IsPrimary = e.IsPrimary,
+                DoNotEmail = e.DoNotEmail
+            }).ToList(),
+            Companies = contact.CompanyContacts.Select(ccc => new ContactCompanyResponse
+            {
+                Id = ccc.Id,
+                CompanyId = ccc.CompanyId,
+                CompanyName = ccc.Company?.CompanyName ?? "Unknown",
+                IsPrimary = ccc.IsPrimary,
+                Notes = ccc.Notes
+            }).ToList()
+        };
     }
 }
