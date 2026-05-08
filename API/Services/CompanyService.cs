@@ -1,4 +1,5 @@
-﻿using API.Data;
+using API.Data;
+using API.DTOs;
 using API.DTOs.Companies;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,8 @@ namespace API.Services;
 
 public class CompanyService(ApplicationDbContext context) : ICompanyService
 {
+    private const int MaxCompanyContactsPageSize = 100;
+
     public async Task<CompanyResponse> CreateCompanyAsync(CreateCompanyRequest request)
     {
         var company = new Company
@@ -56,59 +59,124 @@ public class CompanyService(ApplicationDbContext context) : ICompanyService
 
     public async Task<IEnumerable<CompanyResponse>> GetCompaniesAsync()
     {
-        var companies = await context.Companies
-            .Include(c => c.CompanyContacts)
-                .ThenInclude(cc => cc.Contact)
+        return await context.Companies
+            .AsNoTracking()
+            .OrderBy(c => c.CompanyName)
+            .ThenBy(c => c.Id)
+            .Select(c => new CompanyResponse
+            {
+                Id = c.Id,
+                CompanyName = c.CompanyName,
+                Address = c.Address,
+                Address2 = c.Address2,
+                City = c.City,
+                State = c.State,
+                Zip = c.Zip,
+                Country = c.Country,
+                WebsiteUrl = c.WebsiteUrl,
+                Type = c.Type,
+                TaxId = c.TaxId,
+                LastUpdate = c.LastUpdate,
+                Collections = c.Collections,
+                WriteOff = c.WriteOff,
+                PrimaryRepName = c.PrimaryRepName,
+                LegacyPrimaryCategory = c.LegacyPrimaryCategory,
+                HubspotCompanyId = c.HubspotCompanyId,
+                Latitude = c.Latitude,
+                Longitude = c.Longitude,
+                CreatedDate = c.CreatedDate,
+                IsActive = c.IsActive,
+                IsNewCompany = c.IsNewCompany,
+                CompanySpecialBilling = c.CompanySpecialBilling,
+                ContactCount = c.CompanyContacts.Count
+            })
             .ToListAsync();
-
-        return companies.Select(MapToDto);
     }
 
     public async Task<CompanyResponse?> GetCompanyByIdAsync(Guid id)
     {
-        var company = await context.Companies
-            .Include(c => c.CompanyContacts)
-                .ThenInclude(cc => cc.Contact)
-            .FirstOrDefaultAsync(c => c.Id == id);
-
-        return company == null ? null : MapToDto(company);
+        return await context.Companies
+            .AsNoTracking()
+            .Where(c => c.Id == id)
+            .Select(c => new CompanyResponse
+            {
+                Id = c.Id,
+                CompanyName = c.CompanyName,
+                Address = c.Address,
+                Address2 = c.Address2,
+                City = c.City,
+                State = c.State,
+                Zip = c.Zip,
+                Country = c.Country,
+                WebsiteUrl = c.WebsiteUrl,
+                Type = c.Type,
+                TaxId = c.TaxId,
+                LastUpdate = c.LastUpdate,
+                Collections = c.Collections,
+                WriteOff = c.WriteOff,
+                PrimaryRepName = c.PrimaryRepName,
+                LegacyPrimaryCategory = c.LegacyPrimaryCategory,
+                HubspotCompanyId = c.HubspotCompanyId,
+                Latitude = c.Latitude,
+                Longitude = c.Longitude,
+                CreatedDate = c.CreatedDate,
+                IsActive = c.IsActive,
+                IsNewCompany = c.IsNewCompany,
+                CompanySpecialBilling = c.CompanySpecialBilling,
+                ContactCount = c.CompanyContacts.Count
+            })
+            .FirstOrDefaultAsync();
     }
 
-    private static CompanyResponse MapToDto(Company company)
+    public async Task<PagedResponse<CompanyContactResponse>?> GetCompanyContactsAsync(
+        Guid companyId,
+        CompanyContactsQuery query)
     {
-        return new CompanyResponse
+        var companyExists = await context.Companies.AnyAsync(c => c.Id == companyId);
+        if (!companyExists)
         {
-            Id = company.Id,
-            CompanyName = company.CompanyName,
-            Address = company.Address,
-            Address2 = company.Address2,
-            City = company.City,
-            State = company.State,
-            Zip = company.Zip,
-            Country = company.Country,
-            WebsiteUrl = company.WebsiteUrl,
-            Type = company.Type,
-            TaxId = company.TaxId,
-            LastUpdate = company.LastUpdate,
-            Collections = company.Collections,
-            WriteOff = company.WriteOff,
-            PrimaryRepName = company.PrimaryRepName,
-            LegacyPrimaryCategory = company.LegacyPrimaryCategory,
-            HubspotCompanyId = company.HubspotCompanyId,
-            Latitude = company.Latitude,
-            Longitude = company.Longitude,
-            CreatedDate = company.CreatedDate,
-            IsActive = company.IsActive,
-            IsNewCompany = company.IsNewCompany,
-            CompanySpecialBilling = company.CompanySpecialBilling,
-            Contacts = company.CompanyContacts.Select(cc => new CompanyContactResponse
-            {
-                Id = cc.Id,
-                ContactId = cc.ContactId,
-                ContactName = cc.Contact != null ? $"{cc.Contact.FirstName} {cc.Contact.LastName}".Trim() : "Unknown",
-                IsPrimary = cc.IsPrimary,
-                Notes = cc.Notes
-            }).ToList()
+            return null;
+        }
+
+        var page = Math.Max(query.Page ?? 1, 1);
+        var pageSize = Math.Clamp(query.PageSize ?? 20, 1, MaxCompanyContactsPageSize);
+
+        var dbQuery = context.CompanyContacts
+            .AsNoTracking()
+            .Where(cc => cc.CompanyId == companyId);
+
+        var totalCount = await dbQuery.CountAsync();
+
+        var contacts = await dbQuery
+            .Include(cc => cc.Contact)
+            .OrderByDescending(cc => cc.IsPrimary)
+            .ThenBy(cc => cc.Contact.LastName)
+            .ThenBy(cc => cc.Contact.FirstName)
+            .ThenBy(cc => cc.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResponse<CompanyContactResponse>
+        {
+            Items = contacts.Select(MapCompanyContactToDto),
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
+    }
+
+    private static CompanyContactResponse MapCompanyContactToDto(CompanyContact companyContact)
+    {
+        return new CompanyContactResponse
+        {
+            Id = companyContact.Id,
+            ContactId = companyContact.ContactId,
+            ContactName = companyContact.Contact != null
+                ? $"{companyContact.Contact.FirstName} {companyContact.Contact.LastName}".Trim()
+                : "Unknown",
+            IsPrimary = companyContact.IsPrimary,
+            Notes = companyContact.Notes
         };
     }
 }

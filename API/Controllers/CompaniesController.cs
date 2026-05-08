@@ -1,4 +1,5 @@
-﻿using API.DTOs.Companies;
+using API.DTOs;
+using API.DTOs.Companies;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,7 @@ public class CompaniesController(ICompanySearchService searchService, ICompanySe
     public async Task<IActionResult> Search([FromQuery] CompanyQuery query)
     {
         var (items, totalCount) = await searchService.SearchAsync(query);
-        
+
         return Ok(new
         {
             Items = items,
@@ -32,13 +33,6 @@ public class CompaniesController(ICompanySearchService searchService, ICompanySe
         return CreatedAtAction(nameof(GetCompanyById), new { id = createdCompany.Id }, createdCompany);
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<CompanyResponse>>> GetCompanies()
-    {
-        var companies = await companyService.GetCompaniesAsync();
-        return Ok(companies);
-    }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<CompanyResponse>> GetCompanyById(Guid id)
     {
@@ -49,5 +43,19 @@ public class CompaniesController(ICompanySearchService searchService, ICompanySe
         }
 
         return Ok(company);
+    }
+
+    [HttpGet("{id}/contacts")]
+    public async Task<ActionResult<PagedResponse<CompanyContactResponse>>> GetCompanyContacts(
+        Guid id,
+        [FromQuery] CompanyContactsQuery query)
+    {
+        var contacts = await companyService.GetCompanyContactsAsync(id, query);
+        if (contacts == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(contacts);
     }
 }

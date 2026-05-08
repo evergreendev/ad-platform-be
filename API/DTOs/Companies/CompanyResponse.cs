@@ -1,5 +1,3 @@
-﻿using API.DTOs.Contacts;
-
 namespace API.DTOs.Companies;
 
 public class CompanyResponse
@@ -27,8 +25,7 @@ public class CompanyResponse
     public bool IsActive { get; set; }
     public bool IsNewCompany { get; set; }
     public bool? CompanySpecialBilling { get; set; }
-    
-    public ICollection<CompanyContactResponse> Contacts { get; set; } = new List<CompanyContactResponse>();
+    public int ContactCount { get; set; }
 }
 
 public class CompanyContactResponse

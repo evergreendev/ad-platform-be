@@ -20,9 +20,9 @@ public class CampaignsController(ICampaignService campaignService) : ControllerB
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CampaignResponse>>> GetCampaigns()
+    public async Task<ActionResult<PagedResponse<CampaignResponse>>> GetCampaigns([FromQuery] CampaignsQuery query)
     {
-        var campaigns = await campaignService.GetCampaignsAsync();
+        var campaigns = await campaignService.GetCampaignsAsync(query);
         return Ok(campaigns);
     }
 

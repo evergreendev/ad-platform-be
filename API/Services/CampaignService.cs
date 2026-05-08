@@ -9,6 +9,7 @@ namespace API.Services;
 
 public class CampaignService(ApplicationDbContext context) : ICampaignService
 {
+    private const int MaxCampaignsPageSize = 100;
     private const int MaxCampaignContactsPageSize = 100;
 
     public async Task<CampaignResponse> CreateCampaignAsync(Campaign campaign)
@@ -23,10 +24,16 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
         return MapToDto(campaign);
     }
 
-    public async Task<IEnumerable<CampaignResponse>> GetCampaignsAsync()
+    public async Task<PagedResponse<CampaignResponse>> GetCampaignsAsync(CampaignsQuery query)
     {
-        return await context.Campaigns
+        var page = Math.Max(query.Page ?? 1, 1);
+        var pageSize = Math.Clamp(query.PageSize ?? 20, 1, MaxCampaignsPageSize);
+
+        var totalCount = await context.Campaigns.CountAsync();
+
+        var campaigns = await context.Campaigns
             .OrderByDescending(c => c.CreatedAt)
+            .ThenBy(c => c.Id)
             .Select(c => new CampaignResponse
             {
                 Id = c.Id,
@@ -37,7 +44,17 @@ public class CampaignService(ApplicationDbContext context) : ICampaignService
                 UpdatedAt = c.UpdatedAt,
                 ContactCount = c.CampaignContacts.Count
             })
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
+
+        return new PagedResponse<CampaignResponse>
+        {
+            Items = campaigns,
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
     }
 
     public async Task<CampaignResponse?> GetCampaignByIdAsync(Guid id)

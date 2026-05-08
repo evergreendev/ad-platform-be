@@ -7,7 +7,7 @@ namespace API.Services;
 public interface ICampaignService
 {
     Task<CampaignResponse> CreateCampaignAsync(Campaign campaign);
-    Task<IEnumerable<CampaignResponse>> GetCampaignsAsync();
+    Task<PagedResponse<CampaignResponse>> GetCampaignsAsync(CampaignsQuery query);
     Task<CampaignResponse?> GetCampaignByIdAsync(Guid id);
     Task<PagedResponse<CampaignContactResponse>?> GetCampaignContactsAsync(Guid campaignId, CampaignContactsQuery query);
     Task AddContactsToCampaignAsync(Guid campaignId, IEnumerable<Guid> contactIds);

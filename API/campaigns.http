@@ -19,7 +19,7 @@ scope=api openid profile
 %}
 
 ### Get all campaigns
-GET {{baseUrl}}/Campaigns
+GET {{baseUrl}}/Campaigns?page=1&pageSize=50
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 

@@ -1,4 +1,5 @@
-﻿using API.DTOs.Companies;
+using API.DTOs;
+using API.DTOs.Companies;
 
 namespace API.Services;
 
@@ -7,4 +8,5 @@ public interface ICompanyService
     Task<CompanyResponse> CreateCompanyAsync(CreateCompanyRequest request);
     Task<IEnumerable<CompanyResponse>> GetCompaniesAsync();
     Task<CompanyResponse?> GetCompanyByIdAsync(Guid id);
+    Task<PagedResponse<CompanyContactResponse>?> GetCompanyContactsAsync(Guid companyId, CompanyContactsQuery query);
 }
