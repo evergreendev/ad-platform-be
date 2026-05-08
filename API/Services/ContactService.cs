@@ -1,4 +1,5 @@
-﻿using API.Data;
+using API.Data;
+using API.DTOs;
 using API.DTOs.Contacts;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,8 @@ namespace API.Services;
 
 public class ContactService(ApplicationDbContext context) : IContactService
 {
+    private const int MaxContactsPageSize = 100;
+
     public async Task<ContactResponse> CreateContactAsync(CreateContactRequest request)
     {
         var contact = new Contact
@@ -62,15 +65,31 @@ public class ContactService(ApplicationDbContext context) : IContactService
         return await GetContactByIdAsync(contact.Id) ?? throw new Exception("Failed to retrieve created contact");
     }
 
-    public async Task<IEnumerable<ContactResponse>> GetContactsAsync()
+    public async Task<PagedResponse<ContactResponse>> GetContactsAsync(ContactsQuery query)
     {
+        var page = Math.Max(query.Page ?? 1, 1);
+        var pageSize = Math.Clamp(query.PageSize ?? 20, 1, MaxContactsPageSize);
+
+        var totalCount = await context.Contacts.CountAsync();
+
         var contacts = await context.Contacts
+            .AsNoTracking()
             .Include(c => c.Emails)
             .Include(c => c.CompanyContacts)
                 .ThenInclude(cc => cc.Company)
+            .OrderByDescending(c => c.CreatedDate)
+            .ThenBy(c => c.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
 
-        return contacts.Select(MapToDto);
+        return new PagedResponse<ContactResponse>
+        {
+            Items = contacts.Select(MapToDto),
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
     }
 
     public async Task<ContactResponse?> GetContactByIdAsync(Guid id)

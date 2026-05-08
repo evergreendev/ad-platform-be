@@ -41,6 +41,11 @@ GET {{baseUrl}}/Campaigns/{{campaignId}}
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 
+### Get campaign contacts
+GET {{baseUrl}}/Campaigns/{{campaignId}}/contacts?page=1&pageSize=50
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
 ### Add contacts to campaign
 POST {{baseUrl}}/Campaigns/{{campaignId}}/contacts
 Content-Type: application/json
