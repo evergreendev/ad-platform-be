@@ -5,8 +5,12 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
+using Hangfire;
+using Hangfire.PostgreSql;
 
 var builder = WebApplication.CreateBuilder(args);
+var hangfireConnectionString = builder.Configuration.GetConnectionString("Hangfire");
+var useHangfire = !string.IsNullOrWhiteSpace(hangfireConnectionString);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Default") ??
@@ -17,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     {
         options.UseNpgsql(connectionString,
             x => x.MigrationsHistoryTable("__EFMigrationsHistory_App", "public")
-            ).UseSnakeCaseNamingConvention();
+        ).UseSnakeCaseNamingConvention();
     }
 );
 
@@ -38,29 +42,29 @@ builder.Services.AddOpenIddict()
         {
             options.SetIssuer(issuer);
         }
-        
+
         var encryptionKey = builder.Configuration["OpenIddict:EncryptionKey"];
         if (!string.IsNullOrEmpty(encryptionKey))
         {
             options.AddEncryptionKey(new SymmetricSecurityKey(
                 Convert.FromBase64String(encryptionKey)));
         }
-        
+
         options.AddAudiences("api");
         options.AddAudiences("next-app");
-        
+
 
         options.SetClientId("next-app");
-        
+
         var clientSecret = builder.Configuration["OpenIddict:ClientSecret"];
 
         if (!string.IsNullOrEmpty(clientSecret))
         {
             options.SetClientSecret(clientSecret);
         }
-        
+
         options.UseSystemNetHttp();
-        
+
         options.UseAspNetCore();
     });
 
@@ -71,6 +75,19 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
+
+if (useHangfire)
+{
+    builder.Services.AddHangfire(config =>
+    {
+        config.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UsePostgreSqlStorage(options =>
+                options.UseNpgsqlConnection(hangfireConnectionString));
+    });
+}
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -106,6 +123,11 @@ else
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+if (useHangfire)
+{
+    app.UseHangfireDashboard();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
