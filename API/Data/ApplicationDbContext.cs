@@ -27,6 +27,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<MailMergeTemplate> MailMergeTemplates => Set<MailMergeTemplate>();
     public DbSet<MergeField> MergeFields => Set<MergeField>();
     public DbSet<MailMergeTemplateField> MailMergeTemplateFields => Set<MailMergeTemplateField>();
+    public DbSet<EmailMessage> EmailMessages => Set<EmailMessage>();
+    public DbSet<EmailEvent> EmailEvents => Set<EmailEvent>();
+    public DbSet<EmailLink> EmailLinks => Set<EmailLink>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -50,6 +53,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.ApplyConfiguration(new MailMergeTemplateConfiguration());
         builder.ApplyConfiguration(new MergeFieldConfiguration());
         builder.ApplyConfiguration(new MailMergeTemplateFieldConfiguration());
+        builder.ApplyConfiguration(new EmailMessageConfiguration());
+        builder.ApplyConfiguration(new EmailEventConfiguration());
+        builder.ApplyConfiguration(new EmailLinkConfiguration());
 
         base.OnModelCreating(builder);
     }

@@ -13,4 +13,5 @@ public class Campaign
     public DateTimeOffset UpdatedAt { get; set; }
     
     public ICollection<CampaignContact> CampaignContacts { get; set; } = new List<CampaignContact>();
+    public ICollection<EmailMessage> EmailMessages { get; set; } = new List<EmailMessage>();
 }

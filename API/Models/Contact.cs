@@ -5,6 +5,7 @@ public class Contact
     public Guid Id { get; set; }
     public ICollection<CompanyContact> CompanyContacts { get; set; } = new List<CompanyContact>();
     public ICollection<ContactEmail> Emails { get; set; } = new List<ContactEmail>();
+    public ICollection<EmailMessage> EmailMessages { get; set; } = new List<EmailMessage>();
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? AddressLine1 { get; set; }

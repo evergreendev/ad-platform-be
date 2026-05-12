@@ -17,4 +17,5 @@ public class CompanyContact
     public ICollection<CompanyContactRole> Roles { get; set; } = new List<CompanyContactRole>();
     public ICollection<CompanyContactEmail> Emails { get; set; } = new List<CompanyContactEmail>();
     public ICollection<CompanyContactPhone> Phones { get; set; } = new List<CompanyContactPhone>();
+    public ICollection<EmailMessage> EmailMessages { get; set; } = new List<EmailMessage>();
 }

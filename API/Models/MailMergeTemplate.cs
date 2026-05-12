@@ -12,4 +12,5 @@ public class MailMergeTemplate
     public DateTimeOffset UpdatedAt { get; set; }
 
     public ICollection<MailMergeTemplateField> TemplateFields { get; set; } = new List<MailMergeTemplateField>();
+    public ICollection<EmailMessage> EmailMessages { get; set; } = new List<EmailMessage>();
 }
