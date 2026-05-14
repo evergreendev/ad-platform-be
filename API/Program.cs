@@ -105,6 +105,8 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IIntegrationService, IntegrationService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IEmailMarketingService, EmailMarketingService>();
+builder.Services.AddScoped<IEmailMessageService, EmailMessageService>();
+builder.Services.AddScoped<IExternalRecordLinkService, ExternalRecordLinkService>();
 
 var app = builder.Build();
 

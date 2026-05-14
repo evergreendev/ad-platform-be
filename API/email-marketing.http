@@ -24,7 +24,6 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "integrationId": "679fa751-e8c0-447d-8e62-43ead1ec73d4",
   "toEmail": "customer@example.com",
   "subject": "Test send",
   "htmlBody": "<p>Hello from Ad Platform</p>"

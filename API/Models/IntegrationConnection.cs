@@ -10,6 +10,7 @@ public class IntegrationConnection
     public IntegrationCategory Category { get; set; } = IntegrationCategory.EmailMarketing;
     public string DisplayName { get; set; } = null!;
     public bool IsActive { get; set; } = true;
+    public bool IsDefault { get; set; } = false;
     
     public string? Status { get; set; }
     public string AuthType { get; set; } = "env";

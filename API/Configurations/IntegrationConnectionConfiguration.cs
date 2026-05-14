@@ -28,6 +28,9 @@ public class IntegrationConnectionConfiguration : IEntityTypeConfiguration<Integ
         builder.Property(x => x.IsActive)
             .IsRequired();
 
+        builder.Property(x => x.IsDefault)
+            .IsRequired();
+
         builder.Property(x => x.Status)
             .HasMaxLength(50);
 

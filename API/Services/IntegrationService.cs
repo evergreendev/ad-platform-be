@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.DTOs.Integrations;
+using API.Enums;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,7 +46,17 @@ public class IntegrationService(ApplicationDbContext context) : IIntegrationServ
 
         return integrationConnection == null ? null : MapToDto(integrationConnection);
     }
-
+    
+    public async Task<IntegrationResponse?> GetDefaultIntegrationByCategory(IntegrationCategory category)
+    {
+        var integrationConnection = await context.IntegrationConnections.SingleOrDefaultAsync(x => 
+            x.Category == category 
+            && x.IsActive
+            && x.IsDefault
+            );
+        
+        return integrationConnection == null ? null : MapToDto(integrationConnection);
+    }
     private static IntegrationResponse MapToDto(IntegrationConnection integrationConnection)
     {
         return new IntegrationResponse

@@ -2,14 +2,15 @@
 using System.Text.Json;
 using API.DTOs.EmailMarketing;
 using API.Enums;
+using API.Models;
 
 namespace API.Services;
 
-public class EmailMarketingService(IIntegrationService integrationService, IHttpClientFactory httpClientFactory, IConfiguration configuration) : IEmailMarketingService
+public class EmailMarketingService(IIntegrationService integrationService, IEmailMessageService emailMessageService, IExternalRecordLinkService externalRecordLinkService, IHttpClientFactory httpClientFactory, IConfiguration configuration) : IEmailMarketingService
 {
     public async Task<SendEmailResponse> SendEmailAsync(SendEmailRequest request, CancellationToken cancellationToken = default)
     {
-        var integration = await integrationService.GetIntegrationByIdAsync(request.IntegrationId);
+        var integration = await integrationService.GetDefaultIntegrationByCategory(IntegrationCategory.EmailMarketing);
         if (integration == null)
         {
             throw new ArgumentException("Integration not found.");
@@ -44,7 +45,7 @@ public class EmailMarketingService(IIntegrationService integrationService, IHttp
             {
                 html = request.HtmlBody,
                 subject = request.Subject,
-                from_email = configuration["Integrations:Mailchimp:FromEmail"] ?? "noreply@ad-platform.com",
+                from_email = configuration["Integrations:Mailchimp:FromEmail"] ?? "joe@egmrc.com",
                 from_name = configuration["Integrations:Mailchimp:FromName"] ?? "Ad Platform",
                 to = new[]
                 {
@@ -64,8 +65,56 @@ public class EmailMarketingService(IIntegrationService integrationService, IHttp
         using var document = JsonDocument.Parse(responseBody);
         var firstResult = document.RootElement[0];
         var status = firstResult.GetProperty("status").GetString();
-
+        var externalId = firstResult.GetProperty("_id").GetString();
+        
+        
         var success = status is "sent" or "queued" or "scheduled";
+        
+        
+        
+        var emailMessage = await emailMessageService.CreateEmailMessage(new EmailMessage
+        {
+            CampaignId = request.CampaignId,
+            ContactId = request.ContactId,
+            CompanyContactId = request.CompanyContactId,
+            MailMergeTemplateId = request.MailMergeTemplateId,
+            ToEmailAddress = request.ToEmail,
+            ToDisplayName = request.ToName,
+            Subject = request.Subject,
+            BodyHtml = request.HtmlBody,
+            PlainText = request.PlainTextBody,
+            Status = status switch
+            {
+                "sent" => EmailMessageStatus.Sent,
+                "queued" or "scheduled" => EmailMessageStatus.Queued,
+                "rejected" or "invalid" => EmailMessageStatus.Failed,
+                _ => EmailMessageStatus.Failed
+            },
+            Provider = integration.Provider,
+            ProviderMessageId = externalId,
+            QueuedAt = DateTimeOffset.UtcNow,
+            SentAt = DateTimeOffset.UtcNow,
+            DeliveredAt = DateTimeOffset.UtcNow,
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow,
+        });
+
+        if (externalId != null)
+        {
+            await externalRecordLinkService.CreateExternalRecordLink(new ExternalRecordLink
+            {
+                IntegrationConnectionId = integration.Id,
+                InternalEntityType = "email_message",
+                InternalEntityId = emailMessage.Id,
+                ExternalEntityType = integration.Provider+"_email_message",
+                ExternalId = externalId,
+                SyncStatus = "synced",
+                LastSyncedAt = DateTimeOffset.UtcNow,
+                CreatedAt = DateTimeOffset.UtcNow,
+                UpdatedAt = DateTimeOffset.UtcNow
+            });
+        }
+
 
         return new SendEmailResponse
         {
