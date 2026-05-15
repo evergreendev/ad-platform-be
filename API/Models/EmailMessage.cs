@@ -30,9 +30,16 @@ public class EmailMessage
     public string? Provider { get; set; }
     public string? ProviderMessageId { get; set; }
 
+    public DateTimeOffset? ScheduledFor { get; set; }
     public DateTimeOffset? QueuedAt { get; set; }
     public DateTimeOffset? SentAt { get; set; }
     public DateTimeOffset? DeliveredAt { get; set; }
+    public DateTimeOffset? CancelledAt { get; set; }
+    public DateTimeOffset? FailedAt { get; set; }
+
+    public string? LastError { get; set; }
+    public string? SchedulerJobId { get; set; }
+    public int AttemptCount { get; set; }
 
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }

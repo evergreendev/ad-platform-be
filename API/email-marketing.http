@@ -24,7 +24,38 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "toEmail": "customer@example.com",
+  "toEmail": "joe@egmrc.com",
   "subject": "Test send",
   "htmlBody": "<p>Hello from Ad Platform</p>"
 }
+
+### Schedule email
+POST {{baseUrl}}/EmailMarketing/schedule
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "toEmail": "test@egmrc.com",
+  "toName": "Joe",
+  "subject": "Scheduled test send",
+  "htmlBody": "<p>Hello later from Ad Platform</p>",
+  "plainTextBody": "Hello later from Ad Platform",
+  "scheduledFor": "2026-05-16T15:00:00Z"
+}
+
+> {%
+    client.global.set("email_message_id", response.body.emailMessageId);
+%}
+
+### Reschedule email
+POST {{baseUrl}}/EmailMarketing/{{email_message_id}}/reschedule
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "scheduledFor": "2026-05-16T16:00:00Z"
+}
+
+### Cancel scheduled email
+POST {{baseUrl}}/EmailMarketing/{{email_message_id}}/cancel
+Authorization: Bearer {{auth_token}}

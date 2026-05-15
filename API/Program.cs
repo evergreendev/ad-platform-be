@@ -88,6 +88,11 @@ if (useHangfire)
     });
 
     builder.Services.AddHangfireServer();
+    builder.Services.AddSingleton<IEmailJobScheduler, HangfireEmailJobScheduler>();
+}
+else
+{
+    builder.Services.AddSingleton<IEmailJobScheduler, DisabledEmailJobScheduler>();
 }
 
 builder.Services.AddEndpointsApiExplorer();
@@ -108,6 +113,9 @@ builder.Services.AddScoped<IIntegrationService, IntegrationService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IEmailMarketingService, EmailMarketingService>();
 builder.Services.AddScoped<IEmailMessageService, EmailMessageService>();
+builder.Services.AddScoped<IEmailDeliveryService, EmailDeliveryService>();
+builder.Services.AddScoped<IEmailSchedulingService, EmailSchedulingService>();
+builder.Services.AddScoped<IEmailMarketingAdapter, MailchimpEmailMarketingAdapter>();
 builder.Services.AddScoped<IExternalRecordLinkService, ExternalRecordLinkService>();
 
 var app = builder.Build();

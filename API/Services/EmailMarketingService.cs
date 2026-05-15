@@ -1,77 +1,17 @@
-﻿using System.Net.Http.Headers;
-using System.Text.Json;
 using API.DTOs.EmailMarketing;
 using API.Enums;
 using API.Models;
 
 namespace API.Services;
 
-public class EmailMarketingService(IIntegrationService integrationService, IEmailMessageService emailMessageService, IExternalRecordLinkService externalRecordLinkService, IHttpClientFactory httpClientFactory, IConfiguration configuration) : IEmailMarketingService
+public class EmailMarketingService(
+    IEmailMessageService emailMessageService,
+    IEmailDeliveryService emailDeliveryService,
+    IEmailSchedulingService emailSchedulingService) : IEmailMarketingService
 {
     public async Task<SendEmailResponse> SendEmailAsync(SendEmailRequest request, CancellationToken cancellationToken = default)
     {
-        var integration = await integrationService.GetDefaultIntegrationByCategory(IntegrationCategory.EmailMarketing);
-        if (integration == null)
-        {
-            throw new ArgumentException("Integration not found.");
-        }
-
-        if (!integration.IsActive)
-        {
-            throw new ArgumentException("Integration is inactive.");
-        }
-
-        if (integration.Category != IntegrationCategory.EmailMarketing)
-        {
-            throw new ArgumentException("Integration is not an email marketing integration.");
-        }
-
-        if (!string.Equals(integration.Provider, "Mailchimp", StringComparison.OrdinalIgnoreCase))
-        {
-            throw new ArgumentException("Only Mailchimp provider is supported for this endpoint right now.");
-        }
-
-        var apiKey = configuration["Integrations:Mailchimp:ApiKey"];
-        if (string.IsNullOrWhiteSpace(apiKey))
-        {
-            throw new InvalidOperationException("Missing configuration key Integrations:Mailchimp:ApiKey.");
-        }
-
-        var client = httpClientFactory.CreateClient();
-        var sendRequest = new
-        {
-            key = apiKey,
-            message = new
-            {
-                html = request.HtmlBody,
-                subject = request.Subject,
-                from_email = configuration["Integrations:Mailchimp:FromEmail"] ?? "joe@egmrc.com",
-                from_name = configuration["Integrations:Mailchimp:FromName"] ?? "Ad Platform",
-                to = new[]
-                {
-                    new { email = request.ToEmail, type = "to" }
-                }
-            }
-        };
-
-        var response = await client.PostAsJsonAsync("https://mandrillapp.com/api/1.0/messages/send", sendRequest, cancellationToken);
-        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
-        
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpRequestException($"Mailchimp API returned error: {response.StatusCode} - {responseBody}");
-        }
-
-        using var document = JsonDocument.Parse(responseBody);
-        var firstResult = document.RootElement[0];
-        var status = firstResult.GetProperty("status").GetString();
-        var externalId = firstResult.GetProperty("_id").GetString();
-        
-        
-        var success = status is "sent" or "queued" or "scheduled";
-        
-        
-        
+        var now = DateTimeOffset.UtcNow;
         var emailMessage = await emailMessageService.CreateEmailMessage(new EmailMessage
         {
             CampaignId = request.CampaignId,
@@ -83,67 +23,27 @@ public class EmailMarketingService(IIntegrationService integrationService, IEmai
             Subject = request.Subject,
             BodyHtml = request.HtmlBody,
             PlainText = request.PlainTextBody,
-            Status = status switch
-            {
-                "sent" => EmailMessageStatus.Sent,
-                "queued" or "scheduled" => EmailMessageStatus.Queued,
-                "rejected" or "invalid" => EmailMessageStatus.Failed,
-                _ => EmailMessageStatus.Failed
-            },
-            Provider = integration.Provider,
-            ProviderMessageId = externalId,
-            QueuedAt = DateTimeOffset.UtcNow,
-            SentAt = DateTimeOffset.UtcNow,
-            DeliveredAt = DateTimeOffset.UtcNow,
-            CreatedAt = DateTimeOffset.UtcNow,
-            UpdatedAt = DateTimeOffset.UtcNow,
-        });
+            Status = EmailMessageStatus.Queued,
+            QueuedAt = now,
+            CreatedAt = now,
+            UpdatedAt = now
+        }, cancellationToken);
 
-        if (externalId != null)
-        {
-            await externalRecordLinkService.CreateExternalRecordLink(new ExternalRecordLink
-            {
-                IntegrationConnectionId = integration.Id,
-                InternalEntityType = "email_message",
-                InternalEntityId = emailMessage.Id,
-                ExternalEntityType = integration.Provider+"_email_message",
-                ExternalId = externalId,
-                SyncStatus = "synced",
-                LastSyncedAt = DateTimeOffset.UtcNow,
-                CreatedAt = DateTimeOffset.UtcNow,
-                UpdatedAt = DateTimeOffset.UtcNow
-            });
-        }
-
-
-        return new SendEmailResponse
-        {
-            Success = success,
-            Provider = integration.Provider,
-            Message = success ? $"Email {status} successfully via Mailchimp." : $"Mailchimp failed to send: {status}",
-            ProviderStatus = status
-        };
+        return await emailDeliveryService.SendNowAsync(emailMessage.Id, cancellationToken);
     }
 
-    private async Task<string?> CheckMailchimpStatusAsync(CancellationToken cancellationToken)
+    public Task<SendEmailResponse> ScheduleEmailAsync(ScheduleEmailRequest request, CancellationToken cancellationToken = default)
     {
-        var apiKey = configuration["Integrations:Mailchimp:ApiKey"];
-        if (string.IsNullOrWhiteSpace(apiKey))
-        {
-            throw new InvalidOperationException("Missing configuration key Integrations:Mailchimp:ApiKey.");
-        }
+        return emailSchedulingService.ScheduleAsync(request, cancellationToken);
+    }
 
-        var client = httpClientFactory.CreateClient();
-        var pingRequest = new { key = apiKey };
+    public Task<SendEmailResponse> RescheduleEmailAsync(Guid emailMessageId, DateTimeOffset scheduledFor, CancellationToken cancellationToken = default)
+    {
+        return emailSchedulingService.RescheduleAsync(emailMessageId, scheduledFor, cancellationToken);
+    }
 
-        using var response = await client.PostAsJsonAsync("https://mandrillapp.com/api/1.0/users/ping", pingRequest, cancellationToken);
-        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
-        
-        if (!response.IsSuccessStatusCode)
-        {
-            return $"Error: {response.StatusCode}";
-        }
-
-        return responseBody.Trim('\"'); // Returns "PONG!"
+    public Task CancelScheduledEmailAsync(Guid emailMessageId, CancellationToken cancellationToken = default)
+    {
+        return emailSchedulingService.CancelAsync(emailMessageId, cancellationToken);
     }
 }

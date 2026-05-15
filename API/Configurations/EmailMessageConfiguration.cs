@@ -41,6 +41,12 @@ public class EmailMessageConfiguration : IEntityTypeConfiguration<EmailMessage>
         builder.Property(x => x.ProviderMessageId)
             .HasColumnType("text");
 
+        builder.Property(x => x.LastError)
+            .HasColumnType("text");
+
+        builder.Property(x => x.SchedulerJobId)
+            .HasColumnType("text");
+
         builder.Property(x => x.CreatedAt)
             .IsRequired();
 
@@ -83,5 +89,7 @@ public class EmailMessageConfiguration : IEntityTypeConfiguration<EmailMessage>
         builder.HasIndex(x => x.MailMergeTemplateId);
         builder.HasIndex(x => x.ProviderMessageId);
         builder.HasIndex(x => x.Status);
+        builder.HasIndex(x => x.ScheduledFor);
+        builder.HasIndex(x => x.SchedulerJobId);
     }
 }
