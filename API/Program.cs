@@ -86,6 +86,8 @@ if (useHangfire)
             .UsePostgreSqlStorage(options =>
                 options.UseNpgsqlConnection(hangfireConnectionString));
     });
+
+    builder.Services.AddHangfireServer();
 }
 
 builder.Services.AddEndpointsApiExplorer();
